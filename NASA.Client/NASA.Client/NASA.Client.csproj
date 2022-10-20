@@ -13,9 +13,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\HttpServices\" />
-    <Folder Include="Services\JsonServices\" />
-    <Folder Include="Services\RestServices\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Services\NavigationServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Localization\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
