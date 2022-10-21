@@ -7,9 +7,9 @@ namespace NASA.Client.Services.HttpServices.JsonServices
 {
     public class JsonSerializerDesiralizer<T> where T : class
     {
-        public static async Task<T> GetFromJsonAsync(string requestUrl, HttpClient httpClient, JsonSerializerOptions options)
+        public static async Task<T> GetFromJsonAsync(string requestUrl, HttpClient httpClient)
         {
-            return await httpClient.GetFromJsonAsync<T>(requestUrl, options);
+            return await httpClient.GetFromJsonAsync<T>(requestUrl);
         }
     }
 }

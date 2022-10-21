@@ -10,11 +10,19 @@ namespace NASA.Client.Services.HttpServices
     {
         #region Uri
 
+        protected string ApiKey { get; private set; }
+
+        protected string APOD { get; private set; }
+
+        protected string NEOFeed { get; private set; }
+        protected string NEOLookup { get; private set; }
+        protected string NEOBrowser { get; private set; }
+
+
         #endregion 
-        protected ILogService _logService { get; set; }
-        protected IConfiguration _configuration { get; set; }
-        protected HttpClient _httpClient { get; set; }
-        protected JsonSerializerOptions _options { get; set; }
+        protected ILogService _logService { get; private set; }
+        protected IConfiguration _configuration { get; private set; }
+        protected HttpClient _httpClient { get; private set; }
 
         public BaseHttpService(ILogService logService, IConfiguration configuration, HttpClient httpClient)
         {
@@ -23,17 +31,18 @@ namespace NASA.Client.Services.HttpServices
 
             _httpClient = httpClient;
 
-            _options = new JsonSerializerOptions()
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                PropertyNameCaseInsensitive = true
-            };
-
             InitUrlFromConfig();
         }
         private void InitUrlFromConfig()
         {
-            GetCurrentCustomer = _configuration["Api:User:GetCurrentCustomer"];
+            ApiKey = _configuration["Api:ApiKey"];
+
+            APOD = _configuration["Api:APOD:APOD"];
+
+            NEOFeed = _configuration["Api:NEO:Feed"];
+            NEOLookup = _configuration["Api:NEO:Lookup"];
+            NEOBrowser = _configuration["Api:NEO:Browser"];
+
         }
     }
 }

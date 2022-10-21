@@ -14,7 +14,10 @@
 
   <ItemGroup>
     <Folder Include="Pages\" />
-    <Folder Include="Services\NavigationServices\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NASA.Data\NASA.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
