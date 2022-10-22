@@ -1,7 +1,7 @@
-﻿using NASA.Data.Models;
+﻿using Nasa.Data.Models;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.DataServices.APODServices
+namespace Nasa.Client.Services.DataServices.APODServices
 {
     public interface IGetApodData
     {

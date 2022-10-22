@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using NASA.Client.Services.HttpServices.JsonServices;
-using NASA.Client.Services.LoggerServices;
-using NASA.Data.Models;
+using Nasa.Client.Services.HttpServices.JsonServices;
+using Nasa.Client.Services.LoggerServices;
+using Nasa.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.HttpServices.RestServices
+namespace Nasa.Client.Services.HttpServices.RestServices
 {
     public class RestApiService : BaseHttpService, IRestApiService
     {

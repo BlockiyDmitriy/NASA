@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.NavigationServices
+namespace Nasa.Client.Services.NavigationServices
 {
     public class NavigationService : INavigationService
     {

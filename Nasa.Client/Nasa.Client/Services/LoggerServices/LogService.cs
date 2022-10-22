@@ -1,4 +1,4 @@
-﻿namespace NASA.Client.Services.LoggerServices
+﻿namespace Nasa.Client.Services.LoggerServices
 {
     public class LogService : ILogService
     {

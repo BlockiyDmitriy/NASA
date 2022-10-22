@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NASA.Client.Services.DataServices.APODServices;
-using NASA.Client.Services.HttpServices.RestServices;
-using NASA.Client.Services.LoggerServices;
-using NASA.Client.Services.NavigationServices;
+﻿using Nasa.Client.Services.DataServices.APODServices;
+using Nasa.Client.Services.HttpServices.RestServices;
+using Nasa.Client.Services.LoggerServices;
+using Nasa.Client.Services.NavigationServices;
 
-namespace NASA.Client.Services.Extensions
+namespace Nasa.Client.Services.Extensions
 {
     public static class ServicesExtensions
     {

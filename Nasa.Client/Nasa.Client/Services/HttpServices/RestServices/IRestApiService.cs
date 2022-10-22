@@ -1,7 +1,7 @@
-﻿using NASA.Data.Models;
+﻿using Nasa.Data.Models;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.HttpServices.RestServices
+namespace Nasa.Client.Services.HttpServices.RestServices
 {
     public interface IRestApiService
     {

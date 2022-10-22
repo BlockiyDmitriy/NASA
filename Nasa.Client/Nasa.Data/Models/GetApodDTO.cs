@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NASA.Data.Models
+namespace Nasa.Data.Models
 {
     public class GetApodDTO
     {

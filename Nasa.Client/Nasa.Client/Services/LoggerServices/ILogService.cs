@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.LoggerServices
+namespace Nasa.Client.Services.LoggerServices
 {
     public interface ILogService
     {

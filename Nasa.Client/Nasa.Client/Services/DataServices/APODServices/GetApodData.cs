@@ -1,13 +1,13 @@
-﻿using NASA.Client.Services.HttpServices.RestServices;
-using NASA.Client.Services.LoggerServices;
-using NASA.Data.Models;
+﻿using Nasa.Client.Services.HttpServices.RestServices;
+using Nasa.Client.Services.LoggerServices;
+using Nasa.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.DataServices.APODServices
+namespace Nasa.Client.Services.DataServices.APODServices
 {
     public class GetApodData : IGetApodData
     {

@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace NASA.Client.Services.HttpServices.JsonServices
+namespace Nasa.Client.Services.HttpServices.JsonServices
 {
     public class JsonSerializerDesiralizer<T> where T : class
     {

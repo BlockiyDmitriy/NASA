@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using NASA.Client.Services.LoggerServices;
+using Nasa.Client.Services.LoggerServices;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace NASA.Client.Services.HttpServices
+namespace Nasa.Client.Services.HttpServices
 {
     public abstract class BaseHttpService
     {
