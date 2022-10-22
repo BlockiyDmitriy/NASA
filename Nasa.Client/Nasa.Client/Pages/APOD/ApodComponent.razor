@@ -1,5 +1,5 @@
-﻿<h3>ApodComponent</h3>
+﻿@page "/apod"
 
-@code {
+@using Nasa.Client.Services.DataServices.APODServices;
 
-}
+@inject IGetApodData _getApodDataService

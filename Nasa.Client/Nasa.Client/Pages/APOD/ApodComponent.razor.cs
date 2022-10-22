@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NASA.Client.Pages.APOD
+﻿namespace Nasa.Client.Pages.APOD
 {
     public partial class ApodComponent
     {
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+
+            var apod = await _getApodDataService.GetLastApod();
+        }
     }
 }
