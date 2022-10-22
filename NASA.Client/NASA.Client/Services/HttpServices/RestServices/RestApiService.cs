@@ -24,7 +24,8 @@ namespace NASA.Client.Services.HttpServices.RestServices
                 await _logService.LogAsync("Get last APOD");
 
                 var apod = await JsonSerializerDesiralizer<GetApodDTO>
-                   .GetFromJsonAsync(APOD, _httpClient);
+                   .GetFromJsonAsync(APOD + $"?api_key={ApiKey}", _httpClient);
+
                 return apod;
             }
             catch (Exception e)

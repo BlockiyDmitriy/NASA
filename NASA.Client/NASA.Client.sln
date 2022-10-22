@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NASA.Client", "NASA.Client\NASA.Client.csproj", "{27723F4E-67FB-4918-A21E-3230F4A74DCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASA.Data", "NASA.Data\NASA.Data.csproj", "{B9683441-D0AE-45EF-98EF-DA84D6469675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NASA.Data", "NASA.Data\NASA.Data.csproj", "{B9683441-D0AE-45EF-98EF-DA84D6469675}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
