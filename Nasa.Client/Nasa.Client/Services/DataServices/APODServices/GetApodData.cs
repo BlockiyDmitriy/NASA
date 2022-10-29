@@ -1,11 +1,6 @@
-﻿using Nasa.Client.Services.HttpServices.RestServices;
+﻿using Nasa.Client.Models;
+using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
-using Nasa.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Nasa.Client.Services.DataServices.APODServices
 {
@@ -20,7 +15,7 @@ namespace Nasa.Client.Services.DataServices.APODServices
             _restApiService = restApiService;
         }
 
-        public async Task<GetApodDTO> GetLastApod()
+        public async Task<GetApodDataModel> GetLastApod()
         {
             try
             {
@@ -28,13 +23,23 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
                 var apod = await _restApiService.GetLastAPOD();
 
-                return apod;
+                var apodData = new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
+                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url);
+
+                return apodData;
             }
             catch (Exception e)
             {
                 await _logService.TrackExceptionAsync(e, nameof(GetApodData), nameof(GetLastApod));
-                return new GetApodDTO();
+                return new GetApodDataModel(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
             }
         }
+
+        private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
+        {
+            "video" => MediaTypes.Video,
+            "image" => MediaTypes.Image,
+            _ => MediaTypes.None
+        };
     }
 }

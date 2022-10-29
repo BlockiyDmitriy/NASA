@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Nasa.Data.Models
 {
     public class GetApodDTO
     {
-        public string copyright { get; set; }
-        public string date { get; set; }
-        public string hdurl { get; set; }
-        public string media_type { get; set; }
-        public string service_version { get; set; }
-        public string title { get; set; }
-        public string url { get; set; }
+        [JsonPropertyName("copyright")]
+        public string? Copyright { get; set; }
+        [JsonPropertyName("date")]
+        public string? Date { get; set; }
+        [JsonPropertyName("hdurl")]
+        public string? HdUrl { get; set; }
+        [JsonPropertyName("media_type")]
+        public string? MediaType { get; set; }
+        [JsonPropertyName("service_version")]
+        public string? ServiceVersion { get; set; }
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
     }
 }

@@ -2,4 +2,29 @@
 
 @using Nasa.Client.Services.DataServices.APODServices;
 
+@inject IJSRuntime _jsRuntime
+
 @inject IGetApodData _getApodDataService
+
+<main>
+    <h2>Astronomy Picture of the Day</h2>
+    @if (GetApodData is not null)
+    {
+        <section>
+            <article class="copyright-info">
+                <p class="copyright">Copyright: @GetApodData.Copyright</p><p class="date">Date: @GetApodData.Date</p>
+            </article>
+            @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
+            {
+                <video id="video"
+                autoplay 
+                controls/>
+            }
+            else
+            {
+                <img src="@GetApodData.Url"/>                
+            }
+        </section>
+
+    }
+</main>

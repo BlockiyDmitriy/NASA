@@ -1,0 +1,15 @@
+﻿.copyright-info{
+    display: block;
+}
+.copyright {
+    display: inline-block;
+    text-align: left;
+    width: 75%;
+    height: auto;
+}
+.date {
+    display: inline-block;
+    text-align: right;
+    width: 25%;
+    height: auto;
+}

@@ -2,6 +2,7 @@
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Data.Models;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Nasa.Client.Services.HttpServices.RestServices
 {
@@ -20,6 +21,8 @@ namespace Nasa.Client.Services.HttpServices.RestServices
 
                 var apod = await JsonSerializerDesiralizer<GetApodDTO>
                    .GetFromJsonAsync(APOD + $"?api_key={ApiKey}", _httpClient);
+
+                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializer.Serialize(apod).ToString()));
 
                 return apod;
             }
