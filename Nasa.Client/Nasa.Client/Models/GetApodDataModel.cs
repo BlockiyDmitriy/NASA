@@ -1,4 +1,6 @@
-﻿namespace Nasa.Client.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Nasa.Client.Models
 {
     public class GetApodDataModel
     {
@@ -9,8 +11,11 @@
         public string? ServiceVersion { get; private set; }
         public string? Title { get; private set; }
         public string? Url { get; private set; }
+        public string? Explanation { get; private set; }
+        public string? ThumbnailUrl { get; private set; }
 
-        public GetApodDataModel(MediaTypes mediaTypes, string? copyright, string? date, string? hdUrl, string? serviceVersion, string? title, string? url)
+        public GetApodDataModel(MediaTypes mediaTypes, string? copyright, string? date, string? hdUrl, string? serviceVersion, string? title, string? url,
+            string? explanation, string? thumbnailUrl)
         {
             MediaTypes = mediaTypes;
             Copyright = copyright;
@@ -19,6 +24,8 @@
             ServiceVersion = serviceVersion;
             Title = title;
             Url = url;
+            Explanation = explanation;
+            ThumbnailUrl = thumbnailUrl;
         }
     }
     

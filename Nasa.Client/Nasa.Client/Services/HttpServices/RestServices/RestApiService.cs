@@ -22,7 +22,27 @@ namespace Nasa.Client.Services.HttpServices.RestServices
                 var apod = await JsonSerializerDesiralizer<GetApodDTO>
                    .GetFromJsonAsync(APOD + $"?api_key={ApiKey}", _httpClient);
 
-                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializer.Serialize(apod).ToString()));
+                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializerDesiralizer<GetApodDTO>.SerializeData(apod)));
+
+                return apod;
+            }
+            catch (Exception e)
+            {
+                await _logService.TrackExceptionAsync(e, MethodBase.GetCurrentMethod()?.Name);
+                return new GetApodDTO();
+            }
+        }
+
+        public async Task<GetApodDTO> GetApodByDate(DateTimeOffset date)
+        {
+            try
+            {
+                await _logService.LogAsync("Get APOD by date");
+
+                var apod = await JsonSerializerDesiralizer<GetApodDTO>
+                   .GetFromJsonAsync(APOD + $"?api_key={ApiKey}&{date.Date}", _httpClient);
+
+                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializerDesiralizer<GetApodDTO>.SerializeData(apod)));
 
                 return apod;
             }

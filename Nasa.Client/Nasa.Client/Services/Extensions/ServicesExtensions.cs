@@ -13,7 +13,7 @@ namespace Nasa.Client.Services.Extensions
             services.AddSingleton<ILogService, LogService>();
 
             services.AddScoped<IRestApiService, RestApiService>();
-            services.AddScoped<IGetApodData, GetApodData>();
+            services.AddScoped<IGetApodDataService, GetApodDataService>();
 
             return services;
         }

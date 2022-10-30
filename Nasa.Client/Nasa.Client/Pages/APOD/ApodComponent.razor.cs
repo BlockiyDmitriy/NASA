@@ -1,5 +1,7 @@
 ﻿using Microsoft.JSInterop;
+using MudBlazor;
 using Nasa.Client.Models;
+using Nasa.Client.Pages.APOD.Dialogs;
 
 namespace Nasa.Client.Pages.APOD
 {
@@ -9,7 +11,7 @@ namespace Nasa.Client.Pages.APOD
 
         public ApodComponent()
         {
-            GetApodData = new(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+            GetApodData = new(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
         }
 
         protected override async Task OnInitializedAsync()
@@ -27,6 +29,23 @@ namespace Nasa.Client.Pages.APOD
             {
                 await _jsRuntime.InvokeVoidAsync("videoControls.playVideo", GetApodData.Url);
             }
+        }
+
+        private Task OnClickImage()
+        {
+            if (GetApodData.MediaTypes == MediaTypes.Image)
+            {
+                if (GetApodData.HdUrl is not null)
+                {
+
+                    var options = new DialogOptions { CloseOnEscapeKey = true };
+                    var parameters = new DialogParameters { ["GetApodData"] = GetApodData };
+
+                    _dialogService.Show<ImageApodDialog>("Simple Dialog", parameters, options);
+                }
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

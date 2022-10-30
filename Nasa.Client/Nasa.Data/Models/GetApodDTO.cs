@@ -21,5 +21,10 @@ namespace Nasa.Data.Models
         public string? Title { get; set; }
         [JsonPropertyName("url")]
         public string? Url { get; set; }
+        [JsonPropertyName("explanation")]
+        public string? Explanation { get; set; }
+        [JsonPropertyName("thumbnail_url")]
+        public string? ThumbnailUrl { get; set; }
+
     }
 }
