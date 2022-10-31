@@ -1,10 +1,6 @@
 ﻿@using Nasa.Client.Models;
 
-<MudDialog>
-    <DialogContent>
-        <img src="@GetApodData.HdUrl" />
-    </DialogContent>
-    <DialogActions>
-        <MudButton Color="Color.Primary" OnClick="Submit">Close</MudButton>
-    </DialogActions>
-</MudDialog>
+<div style="height: 100%;  display: table-column; overflow: scroll">
+    <img class="fullscreen" src="@GetApodData.HdUrl" />
+    <MudButton OnClick="@Submit">Close</MudButton>
+</div>
