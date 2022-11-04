@@ -16,7 +16,8 @@
                 <p class="copyright">Copyright: @GetApodData.Copyright</p><p class="date">Date: @GetApodData.Date</p>
             </article>
 
-            <div @onclick="OnClickImage">
+            <div id="zoomBOut" 
+                @onclick="OnClickImage">
                 @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
                 {
                     <video id="video"
@@ -25,7 +26,9 @@
                 }
                 else
                 {
-                    <img src="@GetApodData.Url" />
+                    <div id="zoomBIn">
+                        <img src="@GetApodData.Url" />
+                    </div>
                 }
             </div>
             <article class="copyright-info">
