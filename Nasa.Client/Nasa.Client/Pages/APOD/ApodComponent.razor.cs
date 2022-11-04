@@ -38,7 +38,7 @@ namespace Nasa.Client.Pages.APOD
                 if (GetApodData.HdUrl is not null)
                 {
 
-                    var options = new DialogOptions { CloseOnEscapeKey = true, FullScreen = true };
+                    var options = new DialogOptions { CloseOnEscapeKey = true, FullScreen = true, NoHeader=true };
                     var parameters = new DialogParameters { ["GetApodData"] = GetApodData };
 
                     _dialogService.Show<ImageApodDialog>(string.Empty, parameters, options);
