@@ -26,6 +26,47 @@
     transition: transform ease 0.3s;
 }
 
-#zoomBIn:hover {
-    transform: scale(1.2);
+    #zoomBIn:hover {
+        transform: scale(1.2);
+    }
+
+.btn-load-more {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #c9c9c9;
+    border: none;
+    color: #000000;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    width: 100%;
 }
+
+    .btn-load-more span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+        
+        .btn-load-more span:after {
+            content: '\00bb';
+            width: 20%;
+            height: 20%;
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .btn-load-more:hover span {
+        padding-right: 25px;
+    }
+
+        .btn-load-more:hover span:after {
+            opacity: 1;
+            right: 0;
+        }

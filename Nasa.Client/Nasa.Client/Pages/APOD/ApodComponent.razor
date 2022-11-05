@@ -17,7 +17,7 @@
             </article>
 
             <div id="zoomBOut"
-                @onclick="OnClickImage">
+             @onclick="OnClickImage">
                 @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
                 {
                     <video id="video"
@@ -35,6 +35,8 @@
                 <p class="copyright">Explanation: @GetApodData.Explanation</p>
             </article>
         </section>
-
     }
+        <buton class="btn-load-more"
+               type="submit"
+           @onclick="LoadMore"><span>Load more</span></buton>
 </main>
