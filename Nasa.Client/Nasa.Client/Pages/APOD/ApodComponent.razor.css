@@ -20,6 +20,7 @@
     width: 60%;
     height: 60%;
     overflow: hidden;
+    cursor: pointer;
 }
 
 #zoomBIn {
