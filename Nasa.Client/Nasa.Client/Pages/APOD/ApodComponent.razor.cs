@@ -33,15 +33,15 @@ namespace Nasa.Client.Pages.APOD
             }
         }
 
-        private Task OnClickImage()
+        private Task OnClickImage(GetApodDataModel selectedApod)
         {
-            if (GetApodData.MediaTypes == MediaTypes.Image)
+            if (selectedApod.MediaTypes == MediaTypes.Image)
             {
-                if (GetApodData.HdUrl is not null)
+                if (selectedApod.HdUrl is not null)
                 {
 
                     var options = new DialogOptions { CloseOnEscapeKey = true, FullScreen = true, NoHeader = true };
-                    var parameters = new DialogParameters { ["GetApodData"] = GetApodData };
+                    var parameters = new DialogParameters { ["GetApodData"] = selectedApod };
 
                     _dialogService.Show<ImageApodDialog>(string.Empty, parameters, options);
                 }

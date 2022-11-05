@@ -19,7 +19,7 @@
             </article>
 
             <div id="zoomBOut"
-             @onclick="OnClickImage">
+             @onclick="() => OnClickImage(GetApodData)">
                 @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
                 {
                     <video id="video"
@@ -48,7 +48,7 @@
                 </article>
 
                 <div id="zoomBOut"
-                    @onclick="OnClickImage">
+                     @onclick="() => OnClickImage(apodData)">
                     @if (apodData.MediaTypes == Models.MediaTypes.Video)
                     {
                         <video id="video" autoplay controls />
