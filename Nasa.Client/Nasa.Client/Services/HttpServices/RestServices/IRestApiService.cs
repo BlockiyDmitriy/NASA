@@ -7,5 +7,6 @@ namespace Nasa.Client.Services.HttpServices.RestServices
     {
         public Task<GetApodDTO> GetLastAPOD(); 
         public Task<GetApodDTO> GetApodByDate(DateTimeOffset date); 
+        public Task<List<GetApodDTO>> GetApodByCount(int count); 
     }
 }

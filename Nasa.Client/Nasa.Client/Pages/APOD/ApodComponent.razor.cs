@@ -8,10 +8,12 @@ namespace Nasa.Client.Pages.APOD
     public partial class ApodComponent
     {
         public GetApodDataModel GetApodData { get; private set; }
+        public List<GetApodDataModel> ListApodNewData { get; private set; }
 
         public ApodComponent()
         {
             GetApodData = new(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+            ListApodNewData = new();
         }
 
         protected override async Task OnInitializedAsync()
@@ -48,9 +50,20 @@ namespace Nasa.Client.Pages.APOD
             return Task.CompletedTask;
         }
 
-        private Task LoadMore()
-        { 
-            return Task.CompletedTask;
+        private async Task LoadMore()
+        {
+            try
+            {
+                await _logService.LogAsync("Load more APOD");
+
+                var newDataList = await _getApodDataService.GetApodByCount(5);
+
+                ListApodNewData = newDataList;
+            }
+            catch (Exception ex)
+            {
+                await _logService.TrackExceptionAsync(ex, this.GetType().ToString(), nameof(LoadMore));
+            }
         }
     }
 }

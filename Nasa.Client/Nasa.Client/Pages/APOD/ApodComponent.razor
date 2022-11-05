@@ -1,11 +1,13 @@
 ﻿@page "/apod"
 
 @using Nasa.Client.Services.DataServices.APODServices;
+@using Nasa.Client.Services.LoggerServices;
 
 @inject IJSRuntime _jsRuntime
 @inject IDialogService _dialogService
 
 @inject IGetApodDataService _getApodDataService
+@inject ILogService _logService
 
 <main>
     <h2>Astronomy Picture of the Day</h2>
@@ -36,7 +38,35 @@
             </article>
         </section>
     }
-        <buton class="btn-load-more"
-               type="submit"
+    @if (ListApodNewData.Any())
+    {
+        @foreach (var apodData in ListApodNewData)
+        {
+            <section>
+                <article class="copyright-info">
+                    <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
+                </article>
+
+                <div id="zoomBOut"
+                    @onclick="OnClickImage">
+                    @if (apodData.MediaTypes == Models.MediaTypes.Video)
+                    {
+                        <video id="video" autoplay controls />
+                    }
+                    else
+                    {
+                        <div id="zoomBIn">
+                            <img src="@apodData.Url" />
+                        </div>
+                    }
+                </div>
+                <article class="copyright-info">
+                    <p class="copyright">Explanation: @apodData.Explanation</p>
+                </article>
+            </section>
+        }
+    }
+    <buton class="btn-load-more"
+           type="submit"
            @onclick="LoadMore"><span>Load more</span></buton>
 </main>

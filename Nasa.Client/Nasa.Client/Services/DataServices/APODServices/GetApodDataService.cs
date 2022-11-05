@@ -1,6 +1,7 @@
 ﻿using Nasa.Client.Models;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Nasa.Client.Services.DataServices.APODServices
 {
@@ -58,6 +59,32 @@ namespace Nasa.Client.Services.DataServices.APODServices
                     string.Empty, string.Empty, string.Empty);
             }
         }
+        public async Task<List<GetApodDataModel>> GetApodByCount(int count)
+        {
+            try
+            {
+                await _logService.LogAsync(nameof(GetApodByCount));
+
+                var apodList = await _restApiService.GetApodByCount(count);
+
+                var apodData = new List<GetApodDataModel>();
+
+                foreach (var apod in apodList)
+                {
+                    apodData.Add(new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
+                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
+                }
+
+                return apodData;
+            }
+            catch (Exception e)
+            {
+                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
+
+                return new List<GetApodDataModel>();
+            }
+        }
+
         private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
         {
             "video" => MediaTypes.Video,
