@@ -1,7 +1,6 @@
 ﻿using Nasa.Client.Models;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Nasa.Client.Services.DataServices.APODServices
 {
@@ -38,16 +37,21 @@ namespace Nasa.Client.Services.DataServices.APODServices
             }
         }
 
-        public async Task<GetApodDataModel> GetApodByDate(DateTimeOffset date)
+        public async Task<List<GetApodDataModel>> GetApodByPeriod(DateTimeOffset fromDate, DateTimeOffset toDate)
         {
             try
             {
-                await _logService.LogAsync(nameof(GetApodByDate));
+                await _logService.LogAsync(nameof(GetApodByPeriod));
 
-                var apod = await _restApiService.GetApodByDate(date);
+                var apodList = await _restApiService.GetApodByPeriod(fromDate, toDate);
 
-                var apodData = new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
-                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
+                var apodData = new List<GetApodDataModel>();
+
+                foreach (var apod in apodList)
+                {
+                    apodData.Add(new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
+                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
+                }
 
                 return apodData;
             }
@@ -55,8 +59,7 @@ namespace Nasa.Client.Services.DataServices.APODServices
             {
                 await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
 
-                return new GetApodDataModel(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
-                    string.Empty, string.Empty, string.Empty);
+                return new List<GetApodDataModel>();
             }
         }
         public async Task<List<GetApodDataModel>> GetApodByCount(int count)

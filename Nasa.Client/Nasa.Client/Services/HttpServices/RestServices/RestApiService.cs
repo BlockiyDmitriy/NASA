@@ -22,7 +22,7 @@ namespace Nasa.Client.Services.HttpServices.RestServices
                 var apod = await JsonSerializerDesiralizer<GetApodDTO>
                    .GetFromJsonAsync(APOD + $"?api_key={ApiKey}", _httpClient);
 
-                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializerDesiralizer<GetApodDTO>.SerializeData(apod)));
+                await _logService.LogAsync(string.Format("Response: {0}", JsonSerializerDesiralizer<GetApodDTO>.SerializeData(apod)));
 
                 return apod ?? new GetApodDTO();
             }
@@ -33,23 +33,26 @@ namespace Nasa.Client.Services.HttpServices.RestServices
             }
         }
 
-        public async Task<GetApodDTO> GetApodByDate(DateTimeOffset date)
+        public async Task<List<GetApodDTO>> GetApodByPeriod(DateTimeOffset fromDate, DateTimeOffset toDate)
         {
             try
             {
-                await _logService.LogAsync("Get APOD by date");
+                await _logService.LogAsync("Get APOD by period");
 
-                var apod = await JsonSerializerDesiralizer<GetApodDTO>
-                   .GetFromJsonAsync(APOD + $"?api_key={ApiKey}&date={date.Date}", _httpClient);
+                await _logService.LogAsync(string.Format("Get APOD from {0} => to {1}", JsonSerializerDesiralizer<string>.SerializeData(fromDate.Date.ToString("yyyy-MM-dd")),
+                    JsonSerializerDesiralizer<string>.SerializeData(toDate.Date.ToString("yyyy-MM-dd"))));
 
-                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializerDesiralizer<GetApodDTO>.SerializeData(apod)));
+                var apod = await JsonSerializerDesiralizer<List<GetApodDTO>>
+                   .GetFromJsonAsync(APOD + $"?api_key={ApiKey}&start_date={fromDate.Date.ToString("yyyy-MM-dd")}&end_date={toDate.Date.ToString("yyyy-MM-dd")}", _httpClient);
 
-                return apod ?? new GetApodDTO();
+                await _logService.LogAsync(string.Format("Response: {0}", JsonSerializerDesiralizer<List<GetApodDTO>>.SerializeData(apod)));
+
+                return apod ?? new List<GetApodDTO>();
             }
             catch (Exception e)
             {
                 await _logService.TrackExceptionAsync(e, MethodBase.GetCurrentMethod()?.Name);
-                return new GetApodDTO();
+                return new List<GetApodDTO>();
             }
         }
         public async Task<List<GetApodDTO>> GetApodByCount(int count)
@@ -61,7 +64,7 @@ namespace Nasa.Client.Services.HttpServices.RestServices
                 var apod = await JsonSerializerDesiralizer<List<GetApodDTO>>
                    .GetFromJsonAsync(APOD + $"?api_key={ApiKey}&count={count}", _httpClient);
 
-                await _logService.LogAsync(string.Format("Request: {0}", JsonSerializerDesiralizer<List<GetApodDTO>>.SerializeData(apod)));
+                await _logService.LogAsync(string.Format("Response: {0}", JsonSerializerDesiralizer<List<GetApodDTO>>.SerializeData(apod)));
 
                 return apod ?? new List<GetApodDTO>();
             }
