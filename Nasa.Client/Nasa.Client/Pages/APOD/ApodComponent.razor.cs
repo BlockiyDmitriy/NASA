@@ -13,7 +13,8 @@ namespace Nasa.Client.Pages.APOD
 
         public ApodComponent()
         {
-            GetApodData = new(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+            GetApodData = new(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty,
+                string.Empty, string.Empty, string.Empty);
             ListRandomApod = new();
             ListLastApod = new();
         }
@@ -28,7 +29,12 @@ namespace Nasa.Client.Pages.APOD
 
         private async Task LoadData()
         {
-            GetApodData = await _getApodDataService.GetLastApod();
+            var getApodData = await _getApodDataService.GetLastApod();
+
+            var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
+                getApodData.Title, "https://www.youtube.com/embed/7dh5VL5YGoA?rel=0", getApodData.Explanation, null);
+
+            GetApodData = t;
 
             if (GetApodData.MediaTypes == MediaTypes.Video)
             {
