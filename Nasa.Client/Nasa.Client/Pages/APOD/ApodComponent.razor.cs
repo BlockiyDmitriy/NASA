@@ -1,5 +1,4 @@
-﻿using Microsoft.JSInterop;
-using MudBlazor;
+﻿using MudBlazor;
 using Nasa.Client.Models;
 using Nasa.Client.Pages.APOD.Dialogs;
 
@@ -29,30 +28,17 @@ namespace Nasa.Client.Pages.APOD
 
         private async Task LoadData()
         {
-            var getApodData = await _getApodDataService.GetLastApod();
+            GetApodData = await _getApodDataService.GetLastApod();
 
-            var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
-                getApodData.Title, "https://www.youtube.com/embed/7dh5VL5YGoA?rel=0", getApodData.Explanation, null);
-
-            GetApodData = t;
-
-            if (GetApodData.MediaTypes == MediaTypes.Video)
-            {
-                await _jsRuntime.InvokeVoidAsync("videoControls.playVideo", GetApodData.Url);
-            }
+            // Mock data
+            //var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
+            //    getApodData.Title, "https://www.youtube.com/embed/7dh5VL5YGoA?rel=0", getApodData.Explanation, null);
         }
 
         private async Task LoadLastFiveData()
         {
             var listData = await _getApodDataService.GetApodByPeriod(DateTimeOffset.UtcNow.AddDays(-6).Date, DateTimeOffset.UtcNow.AddDays(-1).Date);
-
-            //foreach (var data in listData)
-            //{
-            //    if (data.MediaTypes == MediaTypes.Video)
-            //    {
-            //        await _jsRuntime.InvokeVoidAsync("videoControls.playVideo", data.Url);
-            //    }
-            //}
+            
             listData = listData.OrderByDescending(a => a.Date).ToList();
 
             ListLastApod = listData;

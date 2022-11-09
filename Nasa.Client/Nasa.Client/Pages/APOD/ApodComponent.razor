@@ -22,10 +22,7 @@
              @onclick="() => OnClickImage(GetApodData)">
                 @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
                 {
-                    <video id="video"
-                   style="max-height: 75vh; max-width: 70vw"
-                   autoplay
-                   controls />
+                    <h3><a href="@GetApodData.Url" target="_blank">Open video</a></h3>
                 }
                 else
                 {
@@ -50,7 +47,11 @@
 
                 <div id="zoomBOut"
              @onclick="() => OnClickImage(apodData)">
-                    @if (apodData.MediaTypes == Models.MediaTypes.Image)
+                    @if (apodData.MediaTypes == Models.MediaTypes.Video)
+                    {
+                        <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
+                    }
+                    else if (apodData.MediaTypes == Models.MediaTypes.Image)
                     {
                         <div id="zoomBIn">
                             <img src="@apodData.Url" />
@@ -76,9 +77,9 @@
                      @onclick="() => OnClickImage(apodData)">
                     @if (apodData.MediaTypes == Models.MediaTypes.Video)
                     {
-                        <video id="video" autoplay controls />
+                        <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
                     }
-                    else
+                    else if (apodData.MediaTypes == Models.MediaTypes.Image)
                     {
                         <div id="zoomBIn">
                             <img src="@apodData.Url" />
