@@ -19,7 +19,7 @@
             </article>
 
             <div id="zoomBOut"
-             @onclick="() => OnClickImage(GetApodData)">
+            @onclick="() => OnClickImage(GetApodData)">
                 @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
                 {
                     <h3><a href="@GetApodData.Url" target="_blank">Open video</a></h3>
@@ -46,7 +46,7 @@
                 </article>
 
                 <div id="zoomBOut"
-             @onclick="() => OnClickImage(apodData)">
+                @onclick="() => OnClickImage(apodData)">
                     @if (apodData.MediaTypes == Models.MediaTypes.Video)
                     {
                         <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
@@ -64,35 +64,38 @@
             </section>
         }
     }
-    @if (ListRandomApod.Any())
-    {
-        @foreach (var apodData in ListRandomApod)
+    <div id="apodContent">
+        @if (ListRandomApod.Any())
         {
-            <section>
-                <article class="copyright-info">
-                    <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
-                </article>
+            @foreach (var apodData in ListRandomApod)
+            {
+                <section>
+                    <article class="copyright-info">
+                        <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
+                    </article>
 
-                <div id="zoomBOut"
-                     @onclick="() => OnClickImage(apodData)">
-                    @if (apodData.MediaTypes == Models.MediaTypes.Video)
-                    {
-                        <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
-                    }
-                    else if (apodData.MediaTypes == Models.MediaTypes.Image)
-                    {
-                        <div id="zoomBIn">
-                            <img src="@apodData.Url" />
-                        </div>
-                    }
-                </div>
-                <article class="copyright-info">
-                    <p class="copyright">Explanation: @apodData.Explanation</p>
-                </article>
-            </section>
+                    <div id="zoomBOut"
+                    @onclick="() => OnClickImage(apodData)">
+                        @if (apodData.MediaTypes == Models.MediaTypes.Video)
+                        {
+                            <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
+                        }
+                        else if (apodData.MediaTypes == Models.MediaTypes.Image)
+                        {
+                            <div id="zoomBIn">
+                                <img src="@apodData.Url" />
+                            </div>
+                        }
+                    </div>
+                    <article class="copyright-info">
+                        <p class="copyright">Explanation: @apodData.Explanation</p>
+                    </article>
+                </section>
+            }
         }
-    }
+    </div>
+
     <buton class="btn-load-more"
            type="submit"
-           @onclick="LoadMore"><span>Load more</span></buton>
+    @onclick="LoadMore"><span>@_loadMoreBtn</span></buton>
 </main>

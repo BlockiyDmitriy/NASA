@@ -1,4 +1,5 @@
-﻿using MudBlazor;
+﻿using Microsoft.JSInterop;
+using MudBlazor;
 using Nasa.Client.Models;
 using Nasa.Client.Pages.APOD.Dialogs;
 
@@ -9,6 +10,8 @@ namespace Nasa.Client.Pages.APOD
         public GetApodDataModel GetApodData { get; private set; }
         public List<GetApodDataModel> ListRandomApod { get; private set; }
         public List<GetApodDataModel> ListLastApod { get; private set; }
+
+        private string _loadMoreBtn = "Load more";
 
         public ApodComponent()
         {
@@ -67,7 +70,14 @@ namespace Nasa.Client.Pages.APOD
             {
                 await _logService.LogAsync("Load more APOD");
 
+                if (ListRandomApod.Any())
+                {
+                    var position = await _jsRuntime.InvokeAsync<string>("ScrollToElement", "apodContent");
+                }
+
                 var newDataList = await _getApodDataService.GetApodByCount(5);
+                
+                _loadMoreBtn = "Refresh";
 
                 ListRandomApod = newDataList;
             }
