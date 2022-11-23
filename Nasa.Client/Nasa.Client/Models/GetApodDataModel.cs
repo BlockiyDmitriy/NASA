@@ -4,6 +4,7 @@ namespace Nasa.Client.Models
 {
     public class GetApodDataModel
     {
+        public string Id { get; set; }
         public MediaTypes MediaTypes { get; private set; } = MediaTypes.None;
         public string? Copyright { get; private set; }
         public string? Date { get; private set; }
@@ -14,9 +15,10 @@ namespace Nasa.Client.Models
         public string? Explanation { get; private set; }
         public string? ThumbnailUrl { get; private set; }
 
-        public GetApodDataModel(MediaTypes mediaTypes, string? copyright, string? date, string? hdUrl, string? serviceVersion, string? title, string? url,
+        public GetApodDataModel(string id, MediaTypes mediaTypes, string? copyright, string? date, string? hdUrl, string? serviceVersion, string? title, string? url,
             string? explanation, string? thumbnailUrl)
         {
+            Id = id;
             MediaTypes = mediaTypes;
             Copyright = copyright;
             Date = date;

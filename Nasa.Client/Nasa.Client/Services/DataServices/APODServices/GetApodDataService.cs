@@ -1,6 +1,7 @@
 ﻿using Nasa.Client.Models;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
+using Nasa.Client.StateManagement.APOD.Services;
 
 namespace Nasa.Client.Services.DataServices.APODServices
 {
@@ -8,34 +9,39 @@ namespace Nasa.Client.Services.DataServices.APODServices
     {
         private readonly IRestApiService _restApiService;
         private readonly ILogService _logService;
+        private readonly IApodStateService _apodStateService;
 
-        public GetApodDataService(IRestApiService restApiService, ILogService logService)
+        public GetApodDataService(IRestApiService restApiService, ILogService logService, IApodStateService apodStateService)
         {
             _logService = logService;
             _restApiService = restApiService;
+            _apodStateService = apodStateService;
         }
 
-        public async Task<GetApodDataModel> GetLastApod()
-        {
-            try
-            {
-                await _logService.LogAsync(nameof(GetLastApod));
+        //TODO: unused
+        //public async Task<GetApodDataModel> GetLastApod()
+        //{
+        //    try
+        //    {
+        //        await _logService.LogAsync(nameof(GetLastApod));
 
-                var apod = await _restApiService.GetLastAPOD();
+        //        var apod = await _restApiService.GetLastAPOD();
 
-                var apodData = new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
-                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
+        //        var apodData = new GetApodDataModel(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
+        //            apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
 
-                return apodData;
-            }
-            catch (Exception e)
-            {
-                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
+        //        await _apodStateService.SetApod(apodData);
 
-                return new GetApodDataModel(MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, 
-                    string.Empty, string.Empty, string.Empty);
-            }
-        }
+        //        return apodData;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
+
+        //        return new GetApodDataModel(Guid.NewGuid().ToString(), MediaTypes.None, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, 
+        //            string.Empty, string.Empty, string.Empty);
+        //    }
+        //}
 
         public async Task<List<GetApodDataModel>> GetApodByPeriod(DateTimeOffset fromDate, DateTimeOffset toDate)
         {
@@ -49,15 +55,18 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
                 foreach (var apod in apodList)
                 {
-                    apodData.Add(new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
+                    apodData.Add(new GetApodDataModel(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
                     apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
                 }
+                apodData = apodData.OrderByDescending(a => a.Date).ToList();
+
+                await _apodStateService.SetApodPeriodData(apodData);
 
                 return apodData;
             }
             catch (Exception e)
             {
-                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
+                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetApodByPeriod));
 
                 return new List<GetApodDataModel>();
             }
@@ -74,15 +83,17 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
                 foreach (var apod in apodList)
                 {
-                    apodData.Add(new GetApodDataModel(GetMediaTypes(apod.MediaType), apod.Copyright,
+                    apodData.Add(new GetApodDataModel(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
                     apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
                 }
+
+                await _apodStateService.SetApodRefreshedData(apodData);
 
                 return apodData;
             }
             catch (Exception e)
             {
-                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetLastApod));
+                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetApodByCount));
 
                 return new List<GetApodDataModel>();
             }

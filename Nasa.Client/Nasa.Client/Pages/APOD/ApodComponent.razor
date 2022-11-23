@@ -2,6 +2,7 @@
 
 @using Nasa.Client.Services.DataServices.APODServices;
 @using Nasa.Client.Services.LoggerServices;
+@using Nasa.Client.StateManagement.APOD.Services;
 
 @inject IJSRuntime _jsRuntime
 @inject IDialogService _dialogService
@@ -11,34 +12,10 @@
 
 <main style="overflow-y: hidden">
     <h2>Astronomy Picture of the Day</h2>
-    @if (GetApodData is not null)
-    {
-        <section>
-            <article class="copyright-info">
-                <p class="copyright">Copyright: @GetApodData.Copyright</p><p class="date">Date: @GetApodData.Date</p>
-            </article>
 
-            <div id="zoomBOut"
-            @onclick="() => OnClickImage(GetApodData)">
-                @if (GetApodData.MediaTypes == Models.MediaTypes.Video)
-                {
-                    <h3><a href="@GetApodData.Url" target="_blank">Open video</a></h3>
-                }
-                else
-                {
-                    <div id="zoomBIn">
-                        <img src="@GetApodData.Url" />
-                    </div>
-                }
-            </div>
-            <article class="copyright-info">
-                <p class="copyright">Explanation: @GetApodData.Explanation</p>
-            </article>
-        </section>
-    }
-    @if (ListLastApod.Any())
+    @if (_apodState?.Value.CurrentApodData is not null)
     {
-        @foreach (var apodData in ListLastApod)
+        @foreach (var apodData in _apodState.Value.CurrentApodData)
         {
             <section>
                 <article class="copyright-info">
@@ -65,9 +42,9 @@
         }
     }
     <div id="apodContent">
-        @if (ListRandomApod.Any())
+        @if (_apodState?.Value.CurrentApodRefreshedData is not null)
         {
-            @foreach (var apodData in ListRandomApod)
+            @foreach (var apodData in _apodState.Value.CurrentApodRefreshedData)
             {
                 <section>
                     <article class="copyright-info">
