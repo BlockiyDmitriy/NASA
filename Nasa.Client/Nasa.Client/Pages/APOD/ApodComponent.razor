@@ -42,9 +42,9 @@
         }
     }
     <div id="apodContent">
-        @if (_apodState?.Value.CurrentApodRefreshedData is not null)
+        @if (_apodRefreshedState?.Value.CurrentApodRefreshedData is not null)
         {
-            @foreach (var apodData in _apodState.Value.CurrentApodRefreshedData)
+            @foreach (var apodData in _apodRefreshedState.Value.CurrentApodRefreshedData)
             {
                 <section>
                     <article class="copyright-info">

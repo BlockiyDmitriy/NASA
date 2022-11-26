@@ -23,10 +23,10 @@ namespace Nasa.Client.StateManagement.APOD.Services
         {
             try
             {
-                await _logService.LogAsync(string.Format("class: {0} => method: {1} => \n\t data: {3}",
+                await _logService.LogAsync(string.Format("class: {0} => method: {1} => \n\t data: {2}",
                     this.GetType().Name, nameof(SetApodPeriodData), JsonSerializerDesiralizer<List<GetApodDataModel>>.SerializeData(model)));
 
-                var action = new CurrentApodAction(model, null);
+                var action = new CurrentApodAction(model);
 
                 _dispatcher.Dispatch(action);
             }
@@ -40,10 +40,10 @@ namespace Nasa.Client.StateManagement.APOD.Services
         {
             try
             {
-                await _logService.LogAsync(string.Format("class: {0} => method: {1} => \n\t data: {3}",
+                await _logService.LogAsync(string.Format("class: {0} => method: {1} => \n\t data: {2}",
                     this.GetType().Name, nameof(SetApodRefreshedData), JsonSerializerDesiralizer<List<GetApodDataModel>>.SerializeData(model)));
 
-                var action = new CurrentApodAction(null, model);
+                var action = new CurrentApodRefreshedAction(model);
 
                 _dispatcher.Dispatch(action);
             }

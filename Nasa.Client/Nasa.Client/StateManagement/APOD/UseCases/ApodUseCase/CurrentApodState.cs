@@ -7,14 +7,12 @@ namespace Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase
     public class CurrentApodState
     {
         public List<GetApodDataModel> CurrentApodData { get;  }
-        public List<GetApodDataModel>? CurrentApodRefreshedData { get;  }
 
         // An empty ctor is needed for the state
         public CurrentApodState() { }
-        public CurrentApodState(List<GetApodDataModel> currentApodMainData, List<GetApodDataModel>? currentApodRefreshedData)
+        public CurrentApodState(List<GetApodDataModel> currentApodMainData)
         {
             CurrentApodData = currentApodMainData;
-            CurrentApodRefreshedData = currentApodRefreshedData;
         }
     }
 }

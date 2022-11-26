@@ -5,13 +5,11 @@ namespace Nasa.Client.StateManagement.APOD.Actions
 {
     public class CurrentApodAction
     {
-        public List<GetApodDataModel>? CurrentApodData { get; }
-        public List<GetApodDataModel>? CurrentApodRefreshedData { get; }
+        public List<GetApodDataModel> CurrentApodData { get; }
 
-        public CurrentApodAction(List<GetApodDataModel>? currentApodMainData, List<GetApodDataModel>? currentApodRefreshedData)
+        public CurrentApodAction(List<GetApodDataModel> currentApodMainData)
         {
             CurrentApodData = currentApodMainData;
-            CurrentApodRefreshedData = currentApodRefreshedData;
         }
     }
 }

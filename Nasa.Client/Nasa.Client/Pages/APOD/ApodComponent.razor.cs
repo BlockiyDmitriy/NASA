@@ -12,6 +12,8 @@ namespace Nasa.Client.Pages.APOD
     {
         [Inject]        
         private IState<CurrentApodState>? _apodState { get; set; }
+        [Inject]        
+        private IState<CurrentApodRefreshedState>? _apodRefreshedState { get; set; }
 
         private string _loadMoreBtn = "Load more";
 
@@ -26,7 +28,7 @@ namespace Nasa.Client.Pages.APOD
         private async Task LoadData()
         {
             _ = await _getApodDataService.GetApodByPeriod(DateTimeOffset.UtcNow.AddDays(-6).Date, DateTimeOffset.UtcNow.Date);
-            
+
             // Mock data
             //var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
             //    getApodData.Title, "https://www.youtube.com/embed/7dh5VL5YGoA?rel=0", getApodData.Explanation, null);
@@ -55,7 +57,7 @@ namespace Nasa.Client.Pages.APOD
             {
                 await _logService.LogAsync("Load more APOD");
 
-                if (_apodState?.Value.CurrentApodRefreshedData is not null && _apodState.Value.CurrentApodRefreshedData.Any())
+                if (_apodRefreshedState?.Value.CurrentApodRefreshedData is not null && _apodRefreshedState.Value.CurrentApodRefreshedData.Any())
                 {
                     var position = await _jsRuntime.InvokeAsync<string>("ScrollToElement", "apodContent");
                 }

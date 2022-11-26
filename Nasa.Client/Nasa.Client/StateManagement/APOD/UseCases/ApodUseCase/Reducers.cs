@@ -9,7 +9,13 @@ namespace Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase
         [ReducerMethod]
         public static CurrentApodState ReduceUpdateCurrentApodAction(CurrentApodState state, CurrentApodAction action)
         {
-            return new(action.CurrentApodData, action.CurrentApodRefreshedData);
+            return new(action.CurrentApodData);
+        }
+
+        [ReducerMethod]
+        public static CurrentApodRefreshedState ReduceUpdateCurrentApodRefreshedAction(CurrentApodRefreshedState state, CurrentApodRefreshedAction action)
+        {
+            return new(action.CurrentApodRefreshedData);
         }
     }
 }
