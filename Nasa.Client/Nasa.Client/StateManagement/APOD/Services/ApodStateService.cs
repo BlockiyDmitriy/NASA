@@ -3,7 +3,6 @@ using Nasa.Client.Models;
 using Nasa.Client.Services.HttpServices.JsonServices;
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Client.StateManagement.APOD.Actions;
-using Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase;
 
 namespace Nasa.Client.StateManagement.APOD.Services
 {

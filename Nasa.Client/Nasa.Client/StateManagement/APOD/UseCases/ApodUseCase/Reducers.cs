@@ -1,5 +1,4 @@
 ﻿using Fluxor;
-using Nasa.Client.Models;
 using Nasa.Client.StateManagement.APOD.Actions;
 
 namespace Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase
