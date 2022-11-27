@@ -1,14 +1,19 @@
 ﻿@page "/apod"
 
+@using Fluxor;
 @using Nasa.Client.Services.DataServices.APODServices;
 @using Nasa.Client.Services.LoggerServices;
 @using Nasa.Client.StateManagement.APOD.Services;
+@using Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase;
 
 @inject IJSRuntime _jsRuntime
 @inject IDialogService _dialogService
 
 @inject IGetApodDataService _getApodDataService
 @inject ILogService _logService
+
+@inject IState<CurrentApodState>? _apodState
+@inject IState<CurrentApodRefreshedState>? _apodRefreshedState
 
 <main style="overflow-y: hidden">
     <h2>Astronomy Picture of the Day</h2>

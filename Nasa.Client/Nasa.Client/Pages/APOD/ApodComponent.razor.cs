@@ -1,33 +1,26 @@
-﻿using Fluxor;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+﻿using Microsoft.JSInterop;
 using MudBlazor;
 using Nasa.Client.Models;
 using Nasa.Client.Pages.APOD.Dialogs;
-using Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase;
 
 namespace Nasa.Client.Pages.APOD
 {
     public partial class ApodComponent
     {
-        [Inject]        
-        private IState<CurrentApodState>? _apodState { get; set; }
-        [Inject]        
-        private IState<CurrentApodRefreshedState>? _apodRefreshedState { get; set; }
-
         private string _loadMoreBtn = "Load more";
-
 
         protected override async Task OnInitializedAsync()
         {
+            await LoadData();
+
             await base.OnInitializedAsync();
 
-            await LoadData();
+            await InvokeAsync(StateHasChanged);
         }
 
         private async Task LoadData()
         {
-            _ = await _getApodDataService.GetApodByPeriod(DateTimeOffset.UtcNow.AddDays(-6).Date, DateTimeOffset.UtcNow.Date);
+            _ = await _getApodDataService.GetApodByPeriod(DateTimeOffset.UtcNow.AddDays(-5).Date, DateTimeOffset.UtcNow.Date);
 
             // Mock data
             //var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
@@ -62,9 +55,11 @@ namespace Nasa.Client.Pages.APOD
                     var position = await _jsRuntime.InvokeAsync<string>("ScrollToElement", "apodContent");
                 }
 
-                _ = await _getApodDataService.GetApodByCount(5);
-                
-                _loadMoreBtn = "Refresh";
+                var res = await _getApodDataService.GetApodByCount(5);
+                if (res.Any())
+                {
+                    _loadMoreBtn = "Refresh";
+                }
             }
             catch (Exception ex)
             {
