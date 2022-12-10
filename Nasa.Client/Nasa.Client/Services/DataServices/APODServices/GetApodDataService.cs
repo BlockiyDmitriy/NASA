@@ -1,4 +1,5 @@
-﻿using Nasa.Client.Models;
+﻿using Nasa.Client.MapperServices;
+using Nasa.Client.Models;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Client.StateManagement.APOD.Services;
@@ -55,8 +56,7 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
                 foreach (var apod in apodList)
                 {
-                    apodData.Add(new GetApodDataModel(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
-                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
+                    apodData.Add(Mapper.GetApodDtoToGetApodDataModel(apod));
                 }
                 apodData = apodData.OrderByDescending(a => a.Date).ToList();
 
@@ -83,8 +83,7 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
                 foreach (var apod in apodList)
                 {
-                    apodData.Add(new GetApodDataModel(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
-                    apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl));
+                    apodData.Add(Mapper.GetApodDtoToGetApodDataModel(apod));
                 }
 
                 await _apodStateService.SetApodRefreshedData(apodData);
@@ -98,13 +97,5 @@ namespace Nasa.Client.Services.DataServices.APODServices
                 return new List<GetApodDataModel>();
             }
         }
-
-        private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
-        {
-            "video" => MediaTypes.Video,
-            "image" => MediaTypes.Image,
-            _ => MediaTypes.None
-        };
-
     }
 }
