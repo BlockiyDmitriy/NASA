@@ -1,8 +1,7 @@
 ﻿using Nasa.Client.Services.HttpServices.JsonServices;
 using Nasa.Client.Services.LoggerServices;
-using Nasa.Data.Models;
+using Nasa.Data.Models.GetApodDTOs;
 using System.Reflection;
-using System.Text.Json;
 
 namespace Nasa.Client.Services.HttpServices.RestServices
 {

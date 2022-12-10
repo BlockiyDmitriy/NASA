@@ -1,5 +1,4 @@
-﻿using Nasa.Data.Models;
-using System.Threading.Tasks;
+﻿using Nasa.Data.Models.GetApodDTOs;
 
 namespace Nasa.Client.Services.HttpServices.RestServices
 {
