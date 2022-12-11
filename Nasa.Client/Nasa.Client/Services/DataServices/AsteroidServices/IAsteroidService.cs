@@ -4,6 +4,6 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
 {
     public interface IAsteroidService
     {
-        public Task<IEnumerable<RecentAsteroidModel>> GetRecentAsteroids();
+        public Task<RecentAsteroidModel> GetRecentAsteroids();
     }
 }

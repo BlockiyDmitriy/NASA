@@ -15,9 +15,9 @@ namespace Nasa.Client.Services.HttpServices.RestServices
 
         #region Asteroid
 
-        public Task<IEnumerable<GetAsteroidDTO>> GetRecentAsteroids(DateTimeOffset fromDate, DateTimeOffset toDate);
-        public Task<IEnumerable<GetAsteroidDTO>> GetUpcomingAsteroids();
-        public Task<IEnumerable<GetAsteroidDTO>> GetImpactRiskAsteroids();
+        public Task<GetAsteroidDTO> GetRecentAsteroids(DateTimeOffset fromDate, DateTimeOffset toDate);
+        public Task<GetAsteroidDTO> GetUpcomingAsteroids();
+        public Task<GetAsteroidDTO> GetImpactRiskAsteroids();
 
         #endregion Asteroid
     }

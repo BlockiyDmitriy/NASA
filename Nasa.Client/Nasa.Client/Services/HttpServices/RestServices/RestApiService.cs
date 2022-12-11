@@ -2,6 +2,9 @@
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Data.Models.AsteroidDTOs;
 using Nasa.Data.Models.GetApodDTOs;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace Nasa.Client.Services.HttpServices.RestServices
 {
@@ -80,32 +83,31 @@ namespace Nasa.Client.Services.HttpServices.RestServices
 
         #region Asteroid
 
-        public async Task<IEnumerable<GetAsteroidDTO>> GetRecentAsteroids(DateTimeOffset fromDate, DateTimeOffset toDate)
+        public async Task<GetAsteroidDTO> GetRecentAsteroids(DateTimeOffset fromDate, DateTimeOffset toDate)
         {
             try
             {
-                await _logService.LogAsync(nameof(GetRecentAsteroids));
+                var response = await _httpClient.GetAsync(NEOFeed + $"?start_date={fromDate.Date.ToString("yyyy-MM-dd")}&end_date={toDate.Date.ToString("yyyy-MM-dd")}&api_key={ApiKey}");
 
-                var apod = await JsonSerializerDesiralizer<IEnumerable<GetAsteroidDTO>>
-                   .GetFromJsonAsync(NEOFeed + $"?start_date={fromDate.Date.ToString("yyyy-MM-dd")}&end_date={toDate.Date.ToString("yyyy-MM-dd")}&api_key={ApiKey}", _httpClient);
+                await _logService.TrackResponseAsync(response);
 
-                await _logService.LogAsync(string.Format("Response: {0}", JsonSerializerDesiralizer<IEnumerable<GetAsteroidDTO>>.SerializeData(apod)));
+                var result = await JsonSerializerDesiralizer<GetAsteroidDTO>.GetFromResponseMessage(response);
 
-                return apod ?? new List<GetAsteroidDTO>();
+                return result ?? new GetAsteroidDTO();
             }
             catch (Exception e)
             {
                 await _logService.TrackExceptionAsync(e, this.GetType().FullName, nameof(GetRecentAsteroids));
-                return new List<GetAsteroidDTO>();
+                return new GetAsteroidDTO();
             }
         }
 
-        public async Task<IEnumerable<GetAsteroidDTO>> GetUpcomingAsteroids()
+        public async Task<GetAsteroidDTO> GetUpcomingAsteroids()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<GetAsteroidDTO>> GetImpactRiskAsteroids()
+        public async Task<GetAsteroidDTO> GetImpactRiskAsteroids()
         {
             throw new NotImplementedException();
         }

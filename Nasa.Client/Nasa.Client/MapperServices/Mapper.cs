@@ -1,4 +1,6 @@
 ﻿using Nasa.Client.Models;
+using Nasa.Client.Models.Asteroids;
+using Nasa.Data.Models.AsteroidDTOs;
 using Nasa.Data.Models.GetApodDTOs;
 
 namespace Nasa.Client.MapperServices
@@ -9,7 +11,8 @@ namespace Nasa.Client.MapperServices
             new(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
                     apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
 
-
+        internal static RecentAsteroidModel GetAsteroidDtoToRecentAsteroidModel(GetAsteroidDTO recentAsteroidDto) =>
+            new();
 
         private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
         {

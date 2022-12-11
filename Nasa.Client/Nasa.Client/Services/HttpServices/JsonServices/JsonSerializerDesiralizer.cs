@@ -9,6 +9,11 @@ namespace Nasa.Client.Services.HttpServices.JsonServices
         {
             return await httpClient.GetFromJsonAsync<T>(requestUrl);
         }
+        
+        public static async Task<T> GetFromResponseMessage(HttpResponseMessage httpResponseMessage)
+        {
+            return await httpResponseMessage.Content.ReadFromJsonAsync<T>();
+        }
 
         public static string SerializeData(T data)
         {
