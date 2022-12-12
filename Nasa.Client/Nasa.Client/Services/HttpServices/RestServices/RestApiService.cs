@@ -2,6 +2,8 @@
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Data.Models.AsteroidDTOs;
 using Nasa.Data.Models.GetApodDTOs;
+using System.Runtime.Serialization.Json;
+using System.Text.Json;
 
 namespace Nasa.Client.Services.HttpServices.RestServices
 {
@@ -87,6 +89,9 @@ namespace Nasa.Client.Services.HttpServices.RestServices
                 var response = await _httpClient.GetAsync(NEOFeed + $"?start_date={fromDate.Date.ToString("yyyy-MM-dd")}&end_date={toDate.Date.ToString("yyyy-MM-dd")}&api_key={ApiKey}");
 
                 await _logService.TrackResponseAsync(response);
+
+                //var settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
+                //var serializer = new DataContractJsonSerializer(typeof(RootObject), settings);
 
                 var result = await JsonSerializerDesiralizer<GetAsteroidDTO>.GetFromResponseMessage(response);
 

@@ -7,7 +7,13 @@ namespace Nasa.Client.Services.HttpServices.JsonServices
     {        
         public static async Task<T> GetFromResponseMessage(HttpResponseMessage httpResponseMessage)
         {
-            return await httpResponseMessage.Content.ReadFromJsonAsync<T>();
+            var options = new JsonSerializerOptions()
+            {
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+
+            return await httpResponseMessage.Content.ReadFromJsonAsync<T>(options);
         }
 
         public static string SerializeData(T data)

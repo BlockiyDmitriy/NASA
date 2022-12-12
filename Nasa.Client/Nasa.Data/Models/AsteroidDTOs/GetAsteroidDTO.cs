@@ -5,6 +5,23 @@ namespace Nasa.Data.Models.AsteroidDTOs
     public class GetAsteroidDTO
     {
         [JsonPropertyName("links")]
+        public LinksDTO Links { get; set; }
+
+        [JsonPropertyName("element_count")]
+        public int ElementCount { get; set; }
+
+        [JsonPropertyName("near_earth_objects")]
+        public NearEarthObjectDTO NearEarthObjects { get; set; }        
+    }
+
+    public class NearEarthObjectDTO
+    {
+        public IDictionary<string, NearObjectDTO> NearObject { get; set; }
+    }
+
+    public class NearObjectDTO
+    {
+        [JsonPropertyName("links")]
         public LinksDTO? Links { get; set; }
 
         [JsonPropertyName("id")]
