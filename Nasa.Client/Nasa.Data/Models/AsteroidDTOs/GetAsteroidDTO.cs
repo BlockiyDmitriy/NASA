@@ -11,12 +11,7 @@ namespace Nasa.Data.Models.AsteroidDTOs
         public int ElementCount { get; set; }
 
         [JsonPropertyName("near_earth_objects")]
-        public NearEarthObjectDTO NearEarthObjects { get; set; }        
-    }
-
-    public class NearEarthObjectDTO
-    {
-        public IDictionary<string, NearObjectDTO> NearObject { get; set; }
+        public IDictionary<string, IEnumerable<NearObjectDTO>> NearObject { get; set; }
     }
 
     public class NearObjectDTO
