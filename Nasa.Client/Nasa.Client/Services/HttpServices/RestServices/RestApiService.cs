@@ -90,9 +90,6 @@ namespace Nasa.Client.Services.HttpServices.RestServices
 
                 await _logService.TrackResponseAsync(response);
 
-                //var settings = new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true };
-                //var serializer = new DataContractJsonSerializer(typeof(RootObject), settings);
-
                 var result = await JsonSerializerDesiralizer<GetAsteroidDTO>.GetFromResponseMessage(response);
 
                 return result ?? new GetAsteroidDTO();

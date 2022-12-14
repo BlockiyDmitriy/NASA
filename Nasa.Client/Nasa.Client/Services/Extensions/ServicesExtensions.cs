@@ -5,6 +5,7 @@ using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Client.Services.NavigationServices;
 using Nasa.Client.StateManagement.APOD.Services;
+using Nasa.Client.StateManagement.Asteroid.Services;
 
 namespace Nasa.Client.Services.Extensions
 {
@@ -18,6 +19,7 @@ namespace Nasa.Client.Services.Extensions
                 options.ScanAssemblies(typeof(Program).Assembly).UseReduxDevTools();
             });
             services.AddScoped<IApodStateService, ApodStateService>();
+            services.AddScoped<IAsteroidStateService, AsteroidStateService>();
 
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ILogService, LogService>();

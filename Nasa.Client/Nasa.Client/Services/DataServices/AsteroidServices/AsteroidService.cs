@@ -2,6 +2,7 @@
 using Nasa.Client.Models.Asteroids;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
+using Nasa.Client.StateManagement.Asteroid.Services;
 
 namespace Nasa.Client.Services.DataServices.AsteroidServices
 {
@@ -9,11 +10,13 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
     {
         private readonly IRestApiService _restApiService;
         private readonly ILogService _logService;
+        private readonly IAsteroidStateService _asteroidStateService;
 
-        public AsteroidService(IRestApiService restApiService, ILogService logService)
+        public AsteroidService(IRestApiService restApiService, ILogService logService, IAsteroidStateService asteroidStateService)
         {
             _restApiService = restApiService;
             _logService = logService;
+            _asteroidStateService = asteroidStateService;
         }
 
         public async Task<RecentAsteroidModel> GetRecentAsteroids()
@@ -25,6 +28,8 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
                 var recentAsteroidsDto = await _restApiService.GetRecentAsteroids(DateTimeOffset.UtcNow.Date, DateTimeOffset.UtcNow.Date);
 
                 var recentAsteroidsData = Mapper.GetAsteroidDtoToRecentAsteroidModel(recentAsteroidsDto);
+
+                _asteroidStateService.SetAsteroidsData(recentAsteroidsData);
 
                 return recentAsteroidsData;
             }
