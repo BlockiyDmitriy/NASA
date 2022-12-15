@@ -4,6 +4,6 @@ namespace Nasa.Client.StateManagement.Asteroid.Services
 {
     public interface IAsteroidStateService
     {
-        public Task SetAsteroidsData(RecentAsteroidModel recentAsteroidsData);
+        public Task SetRecentAsteroidData(RecentAsteroidModel recentAsteroidsData);
     }
 }

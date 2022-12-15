@@ -19,7 +19,7 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
             _asteroidStateService = asteroidStateService;
         }
 
-        public async Task<RecentAsteroidModel> GetRecentAsteroids()
+        public async Task<IEnumerable<RecentAsteroidModel>> GetRecentAsteroids()
         {
             try
             {
@@ -29,15 +29,15 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
 
                 var recentAsteroidsData = Mapper.GetAsteroidDtoToRecentAsteroidModel(recentAsteroidsDto);
 
-                _asteroidStateService.SetAsteroidsData(recentAsteroidsData);
+                await _asteroidStateService.SetRecentAsteroidData(recentAsteroidsData);
 
-                return recentAsteroidsData;
+                return new List<RecentAsteroidModel>();
             }
             catch (Exception e)
             {
                 await _logService.TrackExceptionAsync(e, nameof(RecentAsteroidModel), nameof(GetRecentAsteroids));
 
-                return new RecentAsteroidModel();
+                return new List<RecentAsteroidModel>();
             }
         }
     }

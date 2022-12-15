@@ -27,8 +27,4 @@
     <ProjectReference Include="..\Nasa.Data\Nasa.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="StateManagement\Asteroid\Actions\" />
-  </ItemGroup>
-
 </Project>

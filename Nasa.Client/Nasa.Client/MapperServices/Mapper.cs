@@ -12,7 +12,7 @@ namespace Nasa.Client.MapperServices
                     apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
 
         internal static RecentAsteroidModel GetAsteroidDtoToRecentAsteroidModel(GetAsteroidDTO recentAsteroidDto) =>
-            new();
+            new(string.Empty,string.Empty,string.Empty,string.Empty);
 
         private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
         {
