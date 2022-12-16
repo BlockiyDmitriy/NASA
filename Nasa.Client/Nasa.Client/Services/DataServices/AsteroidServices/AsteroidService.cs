@@ -27,7 +27,7 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
 
                 var recentAsteroidsDto = await _restApiService.GetRecentAsteroids(DateTimeOffset.UtcNow.Date, DateTimeOffset.UtcNow.Date);
 
-                var recentAsteroidsData = Mapper.GetAsteroidDtoToRecentAsteroidModel(recentAsteroidsDto);
+                var recentAsteroidsData = Mapper.GetAsteroidDtoToRecentAsteroidModel(new Data.Models.AsteroidDTOs.NearObjectDTO());
 
                 await _asteroidStateService.SetRecentAsteroidData(recentAsteroidsData);
 

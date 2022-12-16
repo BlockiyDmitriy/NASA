@@ -11,8 +11,8 @@ namespace Nasa.Client.MapperServices
             new(Guid.NewGuid().ToString(), GetMediaTypes(apod.MediaType), apod.Copyright,
                     apod.Date, apod.HdUrl, apod.ServiceVersion, apod.Title, apod.Url, apod.Explanation, apod.ThumbnailUrl);
 
-        internal static RecentAsteroidModel GetAsteroidDtoToRecentAsteroidModel(GetAsteroidDTO recentAsteroidDto) =>
-            new(string.Empty,string.Empty,string.Empty,string.Empty);
+        internal static RecentAsteroidModel GetAsteroidDtoToRecentAsteroidModel(NearObjectDTO nearObjectDto) =>
+            new(nearObjectDto.Name, nearObjectDto.EstimatedDiameter, nearObjectDto.CloseApproachData);
 
         private static MediaTypes GetMediaTypes(string? mediaType) => mediaType switch
         {
