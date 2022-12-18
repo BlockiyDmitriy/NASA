@@ -6,3 +6,24 @@
 
 @inject IAsteroidService _asteroidService
 @inject IState<RecentAsteroidState> _recentAsteroidState
+
+<main style="overflow-y: hidden">
+    <h2>Asteroids</h2>
+
+    @if (_recentAsteroidState?.Value.RecentAsteroids is not null)
+    {
+        @foreach (var apodData in _recentAsteroidState.Value.RecentAsteroids)
+        {
+            <MudText>@apodData.Name</MudText>
+            <MudText>@apodData.EstimatedDiameter.Meters.EstimatedDiameterMin</MudText>
+            <MudText>@apodData.EstimatedDiameter.Meters.EstimatedDiameterMax</MudText>
+            @foreach (var approachData in apodData.CloseApproachData)
+            {
+                <MudText>@approachData.CloseApproachDate</MudText>
+                <MudText>@approachData.CloseApproachDateFull</MudText>
+                <MudText>@approachData.OrbitingBody</MudText>
+            }
+
+        }
+    }
+</main>
