@@ -7,23 +7,34 @@
 @inject IAsteroidService _asteroidService
 @inject IState<RecentAsteroidState> _recentAsteroidState
 
-<main style="overflow-y: hidden">
+<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@ToggleDrawer" />
     <h2>Asteroids</h2>
 
     @if (_recentAsteroidState?.Value.RecentAsteroids is not null)
     {
         @foreach (var apodData in _recentAsteroidState.Value.RecentAsteroids)
         {
-            <MudText>@apodData.Name</MudText>
-            <MudText>@apodData.EstimatedDiameter.Meters.EstimatedDiameterMin</MudText>
-            <MudText>@apodData.EstimatedDiameter.Meters.EstimatedDiameterMax</MudText>
-            @foreach (var approachData in apodData.CloseApproachData)
-            {
-                <MudText>@approachData.CloseApproachDate</MudText>
-                <MudText>@approachData.CloseApproachDateFull</MudText>
-                <MudText>@approachData.OrbitingBody</MudText>
-            }
+            <MudPaper Class="m-4" Elevation="2">
 
+                <MudText>Name @apodData.Name</MudText>
+                <MudText>EstimatedDiameterMin @apodData.EstimatedDiameter.Meters.EstimatedDiameterMin</MudText>
+                <MudText>EstimatedDiameterMax @apodData.EstimatedDiameter.Meters.EstimatedDiameterMax</MudText>
+                @foreach (var approachData in apodData.CloseApproachData)
+                {
+                    <MudText>CloseApproachDate @approachData.CloseApproachDate</MudText>
+                    <MudText>CloseApproachDateFull @approachData.CloseApproachDateFull</MudText>
+                    <MudText>OrbitingBody @approachData.OrbitingBody</MudText>
+                }
+
+            </MudPaper>
         }
     }
-</main>
+
+<MudDrawer @bind-Open="@_open" Anchor="Anchor.End" Elevation="1" Variant="@DrawerVariant.Temporary">
+    <MudDrawerHeader>
+        <MudText Typo="Typo.h6">Filter</MudText>
+    </MudDrawerHeader>
+    <MudDrawerContainer>
+        <MudText Typo="Typo.h6">Filter content</MudText>
+    </MudDrawerContainer>
+</MudDrawer>

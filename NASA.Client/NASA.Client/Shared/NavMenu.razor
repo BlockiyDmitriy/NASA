@@ -1,4 +1,4 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@*<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Nasa.Client</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -20,7 +20,17 @@
             </NavLink>
         </div>
     </nav>
-</div>
+</div>*@
+
+
+<MudNavMenu>
+    <MudNavLink Href="" Icon="@Icons.Material.Outlined.AllOut">APOD</MudNavLink>
+    <MudNavGroup Title="Asteroids" Icon="@Icons.Material.Outlined.NextPlan" HideExpandIcon="true">
+        <MudNavLink Href="/asteroids" Icon="@Icons.Material.Outlined.IncompleteCircle">Recent</MudNavLink>
+        <MudNavLink Href="/asteroids" Icon="@Icons.Material.Outlined.NextPlan">Upcoming</MudNavLink>
+        <MudNavLink Href="/asteroids" Icon="@Icons.Material.Outlined.NextPlan">Impactrisk</MudNavLink>
+    </MudNavGroup>
+</MudNavMenu>
 
 @code {
     private bool collapseNavMenu = true;
