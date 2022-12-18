@@ -4,7 +4,7 @@
     {
         protected override async Task OnInitializedAsync()
         {
-            var t = await _asteroidService.GetRecentAsteroids();
+            _ = await _asteroidService.GetRecentAsteroids();
 
             await base.OnInitializedAsync();
         }

@@ -16,19 +16,19 @@ namespace Nasa.Client.StateManagement.Asteroid.Services
             _dispatcher = dispatcher;
         }
 
-        public async Task SetRecentAsteroidData(RecentAsteroidModel recentAsteroidsData)
+        public async Task SetRecentAsteroidsData(IEnumerable<RecentAsteroidModel> recentAsteroidsData)
         {
             try
             {
-                await _logService.LogAsync(nameof(SetRecentAsteroidData));
+                await _logService.LogAsync(nameof(SetRecentAsteroidsData));
 
-                var action = new RecentAsteroidAction(new List<RecentAsteroidModel>());
+                var action = new RecentAsteroidAction(recentAsteroidsData);
 
                 _dispatcher.Dispatch(action);
             }
             catch (Exception e)
             {
-                await _logService.TrackExceptionAsync(e, this.GetType().FullName, nameof(SetRecentAsteroidData));
+                await _logService.TrackExceptionAsync(e, this.GetType().FullName, nameof(SetRecentAsteroidsData));
             }
         }
     }

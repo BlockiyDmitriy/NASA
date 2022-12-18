@@ -1,5 +1,8 @@
 ﻿@page "/asteroids"
 
+@using Fluxor;
 @using Nasa.Client.Services.DataServices.AsteroidServices;
+@using Nasa.Client.StateManagement.Asteroid.UseCases;
 
 @inject IAsteroidService _asteroidService
+@inject IState<RecentAsteroidState> _recentAsteroidState

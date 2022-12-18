@@ -7,6 +7,6 @@ namespace Nasa.Client.StateManagement.Asteroid.UseCases
     {
         [ReducerMethod]
         public static RecentAsteroidState ReduceRecentAsteroid(RecentAsteroidState state, RecentAsteroidAction action) =>
-            new();
+            new(action.RecentAsteroids);
     }
 }

@@ -3,6 +3,7 @@ using Nasa.Client.Models.Asteroids;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Client.StateManagement.Asteroid.Services;
+using System.Linq;
 
 namespace Nasa.Client.Services.DataServices.AsteroidServices
 {
@@ -27,11 +28,12 @@ namespace Nasa.Client.Services.DataServices.AsteroidServices
 
                 var recentAsteroidsDto = await _restApiService.GetRecentAsteroids(DateTimeOffset.UtcNow.Date, DateTimeOffset.UtcNow.Date);
 
-                var recentAsteroidsData = Mapper.GetAsteroidDtoToRecentAsteroidModel(new Data.Models.AsteroidDTOs.NearObjectDTO());
+                var recentAsteroidsData = (recentAsteroidsDto.NearObject.Values.SelectMany(items =>
+                    items.Select(item => Mapper.GetAsteroidDtoToRecentAsteroidModel(item)))).ToList();
 
-                await _asteroidStateService.SetRecentAsteroidData(recentAsteroidsData);
+                await _asteroidStateService.SetRecentAsteroidsData(recentAsteroidsData);
 
-                return new List<RecentAsteroidModel>();
+                return recentAsteroidsData;
             }
             catch (Exception e)
             {
