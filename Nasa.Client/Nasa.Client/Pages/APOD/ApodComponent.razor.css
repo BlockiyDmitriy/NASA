@@ -17,6 +17,10 @@
     height: auto;
 }
 
+#apodContent {
+    margin-bottom: 25px;
+}
+
 #zoomBOut {
     width: 30vw;
     aspect-ratio: 16 / 9;
@@ -58,7 +62,7 @@
             content: '\00bb';
             width: 20%;
             height: 20%;
-            position: absolute;
+            position: relative;
             opacity: 0;
             top: 0;
             right: -20px;

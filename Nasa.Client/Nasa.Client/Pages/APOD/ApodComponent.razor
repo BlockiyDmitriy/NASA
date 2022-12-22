@@ -18,7 +18,6 @@
 
 <PageTitle>APOD</PageTitle>
 
-<main style="overflow-y: hidden">
     <h2>Astronomy Picture of the Day</h2>
 
     @if (_apodState?.Value.CurrentApodData is not null)
@@ -26,80 +25,52 @@
         <MudGrid>
             @foreach (var apodData in _apodState.Value.CurrentApodData)
             {
-                <MudItem xs="12" md="6" lg="6">
-
-                    <MudCard Elevation="3" Class="ma-3">
+                <MudItem xs="12" sm="12" md="6" lg="6" xl="4">
+                    <MudCard Elevation="3" Class="ma-3" Style="height: 100%">
                         <MudCardHeader>
                             <article class="copyright-info">
                                 <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
                             </article>
                         </MudCardHeader>
-                        <MudCardMedia Image="@apodData.Url" />
+                        <MudCardMedia Class="d-flex" Image="@apodData.Url" />
                         <MudCardContent>
                             <article class="copyright-info">
-                                <p class="copyright">Explanation: @apodData.Explanation</p>
+                                <p>Explanation: @apodData.Explanation</p>
                             </article>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
-                @*<section>
-        <article class="copyright-info">
-        <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
-        </article>
-
-        <div id="zoomBOut"
-        @onclick="() => OnClickImage(apodData)">
-        @if (apodData.MediaTypes == Models.MediaTypes.Video)
-        {
-        <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
-        }
-        else if (apodData.MediaTypes == Models.MediaTypes.Image)
-        {
-        <div id="zoomBIn">
-        <img src="@apodData.Url" />
-        </div>
-        }
-        </div>
-        <article class="copyright-info">
-        <p class="copyright">Explanation: @apodData.Explanation</p>
-        </article>
-        </section>*@
             }
         </MudGrid>
-
     }
+
+
     <div id="apodContent">
         @if (_apodRefreshedState?.Value.CurrentApodRefreshedData is not null)
         {
-            @foreach (var apodData in _apodRefreshedState.Value.CurrentApodRefreshedData)
-            {
-                <section>
-                    <article class="copyright-info">
-                        <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
-                    </article>
-
-                    <div id="zoomBOut"
-                    @onclick="() => OnClickImage(apodData)">
-                        @if (apodData.MediaTypes == Models.MediaTypes.Video)
-                        {
-                            <h3><a href="@apodData.Url" target="_blank">Open video</a></h3>
-                        }
-                        else if (apodData.MediaTypes == Models.MediaTypes.Image)
-                        {
-                            <div id="zoomBIn">
-                                <img src="@apodData.Url" />
-                            </div>
-                        }
-                    </div>
-                    <article class="copyright-info">
-                        <p class="copyright">Explanation: @apodData.Explanation</p>
-                    </article>
-                </section>
-            }
+            <MudGrid>
+                @foreach (var apodData in _apodRefreshedState.Value.CurrentApodRefreshedData)
+                {
+                    <MudItem xs="12" sm="12" md="6" lg="6" xl="4">
+                        <MudCard Elevation="3" Class="ma-3" Style="height: 100%">
+                            <MudCardHeader>
+                                <article class="copyright-info">
+                                    <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
+                                </article>
+                            </MudCardHeader>
+                            <MudCardMedia Class="d-flex" Image="@apodData.Url" />
+                            <MudCardContent>
+                                <article class="copyright-info">
+                                    <p>Explanation: @apodData.Explanation</p>
+                                </article>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
         }
     </div>
 
     <buton class="btn-load-more"
            type="submit"
     @onclick="LoadMore"><span>@_loadMoreBtn</span></buton>
-</main>
