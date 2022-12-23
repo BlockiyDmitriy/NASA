@@ -55,7 +55,7 @@ namespace Nasa.Client.Pages.APOD
                     var position = await _jsRuntime.InvokeAsync<string>("ScrollToElement", "apodContent");
                 }
 
-                var res = await _getApodDataService.GetApodByCount(5);
+                var res = await _getApodDataService.GetApodByCount(6);
                 if (res.Any())
                 {
                     _loadMoreBtn = "Refresh";
