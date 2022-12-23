@@ -6,5 +6,6 @@ namespace Nasa.Client.StateManagement.APOD.Services
     {
         public Task SetApodPeriodData(List<GetApodDataModel> model);
         public Task SetApodRefreshedData(List<GetApodDataModel> model);
+        public Task SetApodCarouselData(List<GetApodDataModel> model);
     }
 }

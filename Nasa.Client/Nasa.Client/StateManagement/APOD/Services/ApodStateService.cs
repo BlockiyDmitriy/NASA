@@ -51,5 +51,22 @@ namespace Nasa.Client.StateManagement.APOD.Services
                 await _logService.TrackExceptionAsync(e, this.GetType().Name, nameof(SetApodRefreshedData));
             }
         }
+
+        public async Task SetApodCarouselData(List<GetApodDataModel> model)
+        {
+            try
+            {
+                await _logService.LogAsync(string.Format("class: {0} => method: {1} => \n\t data: {2}",
+                    this.GetType().Name, nameof(SetApodCarouselData), JsonSerializerDesiralizer<List<GetApodDataModel>>.SerializeData(model)));
+
+                var action = new CurrentApodCarouselAction(model);
+
+                _dispatcher.Dispatch(action);
+            }
+            catch (Exception e)
+            {
+                await _logService.TrackExceptionAsync(e, this.GetType().Name, nameof(SetApodCarouselData));
+            }
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Nasa.Client.Services.DataServices.APODServices
 
         public Task<List<GetApodDataModel>> GetApodByPeriod(DateTimeOffset fromDate, DateTimeOffset toDate);
         public Task<List<GetApodDataModel>> GetApodByCount(int count);
+        public Task<List<GetApodDataModel>> GetApodByCountForCarousel(int count);
     }
 }

@@ -16,5 +16,11 @@ namespace Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase
         {
             return new(action.CurrentApodRefreshedData);
         }
+
+        [ReducerMethod]
+        public static CurrentApodCarouselState ReduceUpdateCurrentApodRefreshedAction(CurrentApodCarouselState state, CurrentApodCarouselAction action)
+        {
+            return new(action.CurrentApodData);
+        }
     }
 }

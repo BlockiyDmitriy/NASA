@@ -2,6 +2,7 @@
 @page "/apod"
 
 @using Fluxor;
+@using Nasa.Client.Models;
 @using Nasa.Client.Services.DataServices.APODServices;
 @using Nasa.Client.Services.LoggerServices;
 @using Nasa.Client.StateManagement.APOD.Services;
@@ -15,36 +16,26 @@
 
 @inject IState<CurrentApodState>? _apodState
 @inject IState<CurrentApodRefreshedState>? _apodRefreshedState
+@inject IState<CurrentApodCarouselState>? _apodCarouselState
 
 <PageTitle>APOD</PageTitle>
 
-<h2>Astronomy Picture of the Day</h2>
-
-<MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+<MudCarousel Class="mud-width-full mb-4" Style="height:300px;" ItemsSource="@_apodCarouselState.Value.CurrentApodData" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="GetApodDataModel">
     <BulletTemplate Context="selected">
-        <div Class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
+        <div class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
             <span class="mud-icon-button-label">
-                <MudIcon Icon="@(selected ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Circle)" Color="@Color.Inherit" />
+                <MudIcon Icon="@(selected ? Icons.Material.Filled.Circle : Icons.Material.Outlined.Circle)" Color="@Color.Inherit" />
             </span>
         </div>
     </BulletTemplate>
-    <ChildContent>
-        <MudCarouselItem Transition="Transition.Fade" Color="@Color.Primary">
-            <div class="d-flex" style="height:100%">
-                <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
+    <ItemTemplate>
+        <div class="carousel-container" @onclick="(() => OnClickImage(context))">
+            <div class="carousel-img-container">
+                <img src="@context.Url" class="carousel-centered-image" />
             </div>
-        </MudCarouselItem>
-        <MudCarouselItem Transition="Transition.Fade" Color="@Color.Secondary">
-            <div class="d-flex" style="height:100%">
-                <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
-            </div>
-        </MudCarouselItem>
-        <MudCarouselItem Transition="Transition.Fade">
-            <div class="d-flex" style="height:100%">
-                <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Color="@Color.Primary" Size="@Size.Large" />
-            </div>
-        </MudCarouselItem>
-    </ChildContent>
+            <div class="carousel-centered-text">Astronomy Picture of the Day</div>
+        </div>
+    </ItemTemplate>
 </MudCarousel>
 
 @if (_apodState?.Value.CurrentApodData is not null)
@@ -53,7 +44,7 @@
         @foreach (var apodData in _apodState.Value.CurrentApodData)
         {
             <MudItem xs="12" sm="12" md="6" lg="6" xl="4">
-                <MudCard Elevation="3" Class="ma-3" Style="height: 100%">
+                <MudCard Elevation="3" Style="height: 100%">
                     <MudCardHeader>
                         <article class="copyright-info">
                             <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>
@@ -83,7 +74,7 @@
             @foreach (var apodData in _apodRefreshedState.Value.CurrentApodRefreshedData)
             {
                 <MudItem xs="12" sm="12" md="6" lg="6" xl="4">
-                    <MudCard Elevation="3" Class="ma-3" Style="height: 100%">
+                    <MudCard Elevation="3" Style="height: 100%">
                         <MudCardHeader>
                             <article class="copyright-info">
                                 <p class="copyright">Copyright: @apodData.Copyright</p><p class="date">Date: @apodData.Date</p>

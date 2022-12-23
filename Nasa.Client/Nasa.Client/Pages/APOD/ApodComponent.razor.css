@@ -1,4 +1,32 @@
-﻿.copyright-info {
+﻿.carousel-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.carousel-centered-text {
+    position: absolute;
+    color: inherit;
+    font-size: xx-large;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.carousel-img-container {
+    background: #000;
+}
+
+.carousel-centered-image {
+    object-fit: cover;
+    object-position: center;
+    height: 300px;
+    width: 100%;
+    opacity: 0.5;
+}
+
+.copyright-info {
     display: block;
     width: 100%;
 }

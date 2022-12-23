@@ -97,5 +97,32 @@ namespace Nasa.Client.Services.DataServices.APODServices
                 return new List<GetApodDataModel>();
             }
         }
+
+        public async Task<List<GetApodDataModel>> GetApodByCountForCarousel(int count)
+        {
+            try
+            {
+                await _logService.LogAsync(nameof(GetApodByCountForCarousel));
+
+                var apodList = await _restApiService.GetApodByCount(count);
+
+                var apodData = new List<GetApodDataModel>();
+
+                foreach (var apod in apodList)
+                {
+                    apodData.Add(Mapper.GetApodDtoToGetApodDataModel(apod));
+                }
+
+                await _apodStateService.SetApodCarouselData(apodData);
+
+                return apodData;
+            }
+            catch (Exception e)
+            {
+                await _logService.TrackExceptionAsync(e, nameof(GetApodDataService), nameof(GetApodByCountForCarousel));
+
+                return new List<GetApodDataModel>();
+            }
+        }
     }
 }

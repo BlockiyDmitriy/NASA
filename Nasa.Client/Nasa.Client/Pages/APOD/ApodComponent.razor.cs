@@ -20,7 +20,10 @@ namespace Nasa.Client.Pages.APOD
 
         private async Task LoadData()
         {
+
             _ = await _getApodDataService.GetApodByPeriod(DateTimeOffset.UtcNow.AddDays(-5).Date, DateTimeOffset.UtcNow.Date);
+
+            _ = await _getApodDataService.GetApodByCountForCarousel(3);
 
             // Mock data
             //var t = new GetApodDataModel(MediaTypes.Video, getApodData.Copyright, getApodData.Date, getApodData.HdUrl, getApodData.ServiceVersion,
