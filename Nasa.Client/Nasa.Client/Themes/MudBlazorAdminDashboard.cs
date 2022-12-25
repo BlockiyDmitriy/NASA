@@ -11,10 +11,11 @@ namespace Nasa.Client.Themes
                 Primary = Colors.Blue.Darken1,
                 Secondary = Colors.DeepPurple.Accent2,
                 Background = Colors.Grey.Lighten5,
-                AppbarBackground = Colors.Blue.Darken1,
+                AppbarBackground = "#ffffffff",
+                AppbarText = Colors.Grey.Darken1,
                 DrawerBackground = "#FFF",
                 DrawerText = Colors.Blue.Accent1,
-                DrawerIcon = Colors.Yellow.Lighten1,
+                DrawerIcon = Colors.Grey.Default,
                 Success = "#06d79c"
             };
 
