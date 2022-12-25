@@ -1,0 +1,25 @@
+﻿.carousel-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+.copyright-info {
+    display: block;
+    width: 100%;
+}
+
+.copyright {
+    display: inline-block;
+    text-align: left;
+    width: 75%;
+    height: auto;
+    padding-right: 10px;
+}
+
+.date {
+    display: inline-block;
+    text-align: right;
+    width: 25%;
+    height: auto;
+}

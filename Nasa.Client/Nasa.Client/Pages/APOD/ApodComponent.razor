@@ -3,6 +3,7 @@
 
 @using Fluxor;
 @using Nasa.Client.Models;
+@using Nasa.Client.Pages.APOD.Skeleton
 @using Nasa.Client.Services.DataServices.APODServices;
 @using Nasa.Client.Services.LoggerServices;
 @using Nasa.Client.StateManagement.APOD.Services;
@@ -20,23 +21,30 @@
 
 <PageTitle>APOD</PageTitle>
 
-<MudCarousel Class="mud-width-full mb-4" Style="height:300px;" ItemsSource="@_apodCarouselState.Value.CurrentApodData" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="GetApodDataModel">
-    <BulletTemplate Context="selected">
-        <div class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
-            <span class="mud-icon-button-label">
-                <MudIcon Icon="@(selected ? Icons.Material.Filled.Circle : Icons.Material.Outlined.Circle)" Color="@Color.Inherit" />
-            </span>
-        </div>
-    </BulletTemplate>
-    <ItemTemplate>
-        <div class="carousel-container" @onclick="(() => OnClickImage(context))">
-            <div class="carousel-img-container">
-                <img src="@context.Url" class="carousel-centered-image" />
+@if (_apodCarouselState.Value.CurrentApodData is not null)
+{
+    <MudCarousel Class="mud-width-full mb-4" Style="height:300px;" ItemsSource="@_apodCarouselState.Value.CurrentApodData" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="GetApodDataModel">
+        <BulletTemplate Context="selected">
+            <div class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
+                <span class="mud-icon-button-label">
+                    <MudIcon Icon="@(selected ? Icons.Material.Filled.Circle : Icons.Material.Outlined.Circle)" Color="@Color.Inherit" />
+                </span>
             </div>
-            <div class="carousel-centered-text">Astronomy Picture of the Day</div>
-        </div>
-    </ItemTemplate>
-</MudCarousel>
+        </BulletTemplate>
+        <ItemTemplate>
+            <div class="carousel-container" @onclick="(() => OnClickImage(context))">
+                <div class="carousel-img-container">
+                    <img src="@context.Url" class="carousel-centered-image" />
+                </div>
+                <div class="carousel-centered-text">Astronomy Picture of the Day</div>
+            </div>
+        </ItemTemplate>
+    </MudCarousel>
+}
+else
+{
+    <CarouselSkeletonComponent />
+}
 
 @if (_apodState?.Value.CurrentApodData is not null)
 {
@@ -64,6 +72,10 @@
             </MudItem>
         }
     </MudGrid>
+}
+else
+{
+    <MainDataSkeletonComponent />
 }
 
 
@@ -97,6 +109,9 @@
     }
 </div>
 
-<buton class="btn-load-more"
-       type="submit"
-@onclick="LoadMore"><span>@_loadMoreBtn</span></buton>
+@if (_apodState?.Value.CurrentApodData is not null)
+{
+    <buton class="btn-load-more"
+           type="submit"
+    @onclick="    LoadMore"><span>@_loadMoreBtn</span></buton>
+}
