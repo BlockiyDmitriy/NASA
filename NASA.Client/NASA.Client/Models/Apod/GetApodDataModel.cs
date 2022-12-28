@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Nasa.Client.Models
+namespace Nasa.Client.Models.Apod
 {
     public class GetApodDataModel
     {
@@ -30,7 +30,7 @@ namespace Nasa.Client.Models
             ThumbnailUrl = thumbnailUrl;
         }
     }
-    
+
     public enum MediaTypes
     {
         None,

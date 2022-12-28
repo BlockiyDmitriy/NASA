@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using MudBlazor;
-using Nasa.Client.Models;
+using Nasa.Client.Models.Apod;
 using Nasa.Client.Pages.APOD.Dialogs;
 
 namespace Nasa.Client.Pages.APOD

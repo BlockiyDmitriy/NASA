@@ -8,6 +8,7 @@
 @using Nasa.Client.Services.LoggerServices;
 @using Nasa.Client.StateManagement.APOD.Services;
 @using Nasa.Client.StateManagement.APOD.UseCases.ApodUseCase;
+@using Nasa.Client.Models.Apod;
 
 @inject IJSRuntime _jsRuntime
 @inject IDialogService _dialogService
@@ -21,7 +22,7 @@
 
 <PageTitle>APOD</PageTitle>
 
-@if (_apodCarouselState.Value.CurrentApodData is not null)
+@if (_apodCarouselState?.Value.CurrentApodData is not null)
 {
     <MudCarousel Class="mud-width-full mb-4" Style="height:300px;" ItemsSource="@_apodCarouselState.Value.CurrentApodData" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="GetApodDataModel">
         <BulletTemplate Context="selected">

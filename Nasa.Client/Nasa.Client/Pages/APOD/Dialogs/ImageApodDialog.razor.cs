@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Nasa.Client.Models;
+using Nasa.Client.Models.Apod;
 
 namespace Nasa.Client.Pages.APOD.Dialogs
 {

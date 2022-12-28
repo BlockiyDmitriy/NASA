@@ -1,4 +1,4 @@
-﻿using Nasa.Client.Models;
+﻿using Nasa.Client.Models.Apod;
 using Nasa.Client.Models.Asteroids;
 using Nasa.Data.Models.AsteroidDTOs;
 using Nasa.Data.Models.GetApodDTOs;

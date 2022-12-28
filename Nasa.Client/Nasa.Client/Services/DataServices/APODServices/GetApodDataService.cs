@@ -1,5 +1,5 @@
 ﻿using Nasa.Client.MapperServices;
-using Nasa.Client.Models;
+using Nasa.Client.Models.Apod;
 using Nasa.Client.Services.HttpServices.RestServices;
 using Nasa.Client.Services.LoggerServices;
 using Nasa.Client.StateManagement.APOD.Services;
