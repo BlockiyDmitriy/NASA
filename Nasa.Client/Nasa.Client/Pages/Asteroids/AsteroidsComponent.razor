@@ -10,27 +10,61 @@
 <PageTitle>Asteroids</PageTitle>
 
 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@ToggleDrawer" />
-    <h2>Asteroids</h2>
 
-    @if (_recentAsteroidState?.Value.RecentAsteroids is not null)
+@if (_recentAsteroidState?.Value.RecentAsteroids is not null)
+{
+    <section class="section">
+        <h1>Asteroids &#8595;</h1>
+    </section>
+    @foreach (var apodData in _recentAsteroidState.Value.RecentAsteroids)
     {
-        @foreach (var apodData in _recentAsteroidState.Value.RecentAsteroids)
-        {
-            <MudPaper Class="m-4" Elevation="2">
+        <section class="section">
+            <div class="container reveal">
 
-                <MudText>Name @apodData.Name</MudText>
-                <MudText>EstimatedDiameterMin @apodData.EstimatedDiameter.Meters.EstimatedDiameterMin</MudText>
-                <MudText>EstimatedDiameterMax @apodData.EstimatedDiameter.Meters.EstimatedDiameterMax</MudText>
-                @foreach (var approachData in apodData.CloseApproachData)
-                {
-                    <MudText>CloseApproachDate @approachData.CloseApproachDate</MudText>
-                    <MudText>CloseApproachDateFull @approachData.CloseApproachDateFull</MudText>
-                    <MudText>OrbitingBody @approachData.OrbitingBody</MudText>
-                }
-
-            </MudPaper>
-        }
+                <h2>Name @apodData.Name</h2>
+                <div class="text-container">
+                    <div>
+                        <div class="text-box">
+                            <h3>EstimatedDiameterMin</h3>
+                            <p>
+                                @apodData.EstimatedDiameter.Meters.EstimatedDiameterMin
+                            </p>
+                        </div>
+                        <div class="text-box">
+                            <h3>EstimatedDiameterMax</h3>
+                            <p>
+                                @apodData.EstimatedDiameter.Meters.EstimatedDiameterMax
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        @foreach (var approachData in apodData.CloseApproachData)
+                        {
+                            <div class="text-box">
+                                <h3>CloseApproachDate</h3>
+                                <p>
+                                    @approachData.CloseApproachDate
+                                </p>
+                            </div>
+                            <div class="text-box">
+                                <h3>CloseApproachDateFull</h3>
+                                <p>
+                                    @approachData.CloseApproachDateFull
+                                </p>
+                            </div>
+                            <div class="text-box">
+                                <h3>OrbitingBody</h3>
+                                <p>
+                                    @approachData.OrbitingBody
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
     }
+}
 
 <MudDrawer @bind-Open="@_open" Anchor="Anchor.End" Elevation="1" Variant="@DrawerVariant.Temporary">
     <MudDrawerHeader>
