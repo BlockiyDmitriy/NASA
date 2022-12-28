@@ -21,7 +21,6 @@
 @inject IState<CurrentApodCarouselState>? _apodCarouselState
 
 <PageTitle>APOD</PageTitle>
-
 @if (_apodCarouselState?.Value.CurrentApodData is not null)
 {
     <MudCarousel Class="mud-width-full mb-4" Style="height:300px;" ItemsSource="@_apodCarouselState.Value.CurrentApodData" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="GetApodDataModel">
@@ -46,6 +45,7 @@ else
 {
     <CarouselSkeletonComponent />
 }
+<MudPaper Elevation="0" Class="pa-3">
 
 @if (_apodState?.Value.CurrentApodData is not null)
 {
@@ -109,7 +109,7 @@ else
         </MudGrid>
     }
 </div>
-
+</MudPaper>
 @if (_apodState?.Value.CurrentApodData is not null)
 {
     <buton class="btn-load-more"
