@@ -9,7 +9,9 @@
 
 <PageTitle>Asteroids</PageTitle>
 
-<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+<MudPaper Class="d-flex justify-end flex-grow-1 gap-4" Elevation="0">
+    <MudIconButton Class="mr-5" Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+</MudPaper>
 
 @if (_recentAsteroidState?.Value.RecentAsteroids is not null)
 {
@@ -25,15 +27,17 @@
                 <div class="text-container">
                     <div>
                         <div class="text-box">
-                            <h3>EstimatedDiameterMin</h3>
+                            <h3>Estimated diameter Min</h3>
                             <p>
-                                @apodData.EstimatedDiameter.Meters.EstimatedDiameterMin
+                                Meters @apodData.EstimatedDiameter.Meters.EstimatedDiameterMin
+                                Kilometers @apodData.EstimatedDiameter.Kilometers.EstimatedDiameterMin
                             </p>
                         </div>
                         <div class="text-box">
-                            <h3>EstimatedDiameterMax</h3>
+                            <h3>Estimated diameter Max</h3>
                             <p>
-                                @apodData.EstimatedDiameter.Meters.EstimatedDiameterMax
+                                Meters @apodData.EstimatedDiameter.Meters.EstimatedDiameterMax
+                                Kilometers @apodData.EstimatedDiameter.Kilometers.EstimatedDiameterMax
                             </p>
                         </div>
                     </div>
@@ -41,21 +45,33 @@
                         @foreach (var approachData in apodData.CloseApproachData)
                         {
                             <div class="text-box">
-                                <h3>CloseApproachDate</h3>
+                                <h3>Close approach date</h3>
                                 <p>
-                                    @approachData.CloseApproachDate
+                                    Date @approachData.CloseApproachDate
+                                    Full date @approachData.CloseApproachDateFull
                                 </p>
-                            </div>
-                            <div class="text-box">
-                                <h3>CloseApproachDateFull</h3>
-                                <p>
-                                    @approachData.CloseApproachDateFull
-                                </p>
-                            </div>
-                            <div class="text-box">
                                 <h3>OrbitingBody</h3>
                                 <p>
                                     @approachData.OrbitingBody
+                                </p>
+                            </div>
+                        }
+                    </div>
+                    <div>
+                        @foreach (var approachData in apodData.CloseApproachData)
+                        {
+                            <div class="text-box">
+                                <h3>Epoch date close approach</h3>
+                                <p>
+                                    @approachData.EpochDateCloseApproach
+                                </p>
+                                <h3>Relative velocity</h3>
+                                <p>
+                                    @approachData.RelativeVelocity
+                                </p>
+                                <h3>Miss distance</h3>
+                                <p>
+                                    @approachData.MissDistance
                                 </p>
                             </div>
                         }
